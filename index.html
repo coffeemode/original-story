@@ -3,128 +3,118 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>سر صغير... في عالم كبير</title>
 
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Cormorant+Garamond:wght@500;600&display=swap" rel="stylesheet">
+
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Cairo:wght@400;500;600&display=swap');
 
 *{
     box-sizing:border-box;
-    margin:0;
-    padding:0;
 }
 
-html{
-    scroll-behavior:smooth;
+html,body{
+    margin:0;
+    padding:0;
+    width:100%;
+    min-height:100%;
 }
 
 body{
-    min-height:100vh;
     background:
-        radial-gradient(circle at 50% 10%,rgba(211,174,82,.08),transparent 30%),
-        radial-gradient(circle at 10% 90%,rgba(30,61,103,.18),transparent 35%),
-        linear-gradient(135deg,#020817,#061528 48%,#010611);
-    color:#f4f0e7;
-    font-family:"Cairo",sans-serif;
+        radial-gradient(circle at 50% 20%, rgba(28,43,70,.35), transparent 45%),
+        linear-gradient(135deg,#020914,#041326 50%,#020914);
+    color:#f3f0e8;
+    font-family:"Amiri",serif;
     overflow-x:hidden;
 }
 
-/* طبقة غموض */
-body:before{
+/* نجوم خفيفة */
+body::before{
     content:"";
     position:fixed;
     inset:0;
     pointer-events:none;
-    background:
-        linear-gradient(90deg,transparent 49.8%,rgba(218,183,91,.025) 50%,transparent 50.2%);
-    z-index:-1;
+    opacity:.28;
+    background-image:
+        radial-gradient(circle at 12% 20%,#d9b65c 0 1px,transparent 1.5px),
+        radial-gradient(circle at 82% 13%,#fff 0 1px,transparent 1.5px),
+        radial-gradient(circle at 67% 74%,#d9b65c 0 1px,transparent 1.5px),
+        radial-gradient(circle at 25% 83%,#fff 0 1px,transparent 1.5px),
+        radial-gradient(circle at 91% 57%,#d9b65c 0 1px,transparent 1.5px),
+        radial-gradient(circle at 45% 42%,#fff 0 1px,transparent 1.5px);
 }
 
-.app{
+/* الحاوية */
+.wrapper{
     width:100%;
-    max-width:820px;
+    max-width:850px;
+    min-height:100vh;
     margin:auto;
-    padding:22px 16px 120px;
+    padding:55px 25px 80px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
 }
 
-/* التقدم */
-.progress-wrap{
-    height:2px;
+/* المحتوى */
+.story{
     width:100%;
-    background:rgba(255,255,255,.08);
-    margin-bottom:18px;
-}
-
-.progress{
-    height:100%;
-    width:20%;
-    background:linear-gradient(90deg,#8f6b2d,#e5c66f,#8f6b2d);
-    transition:width .7s ease;
-}
-
-/* رقم الصفحة */
-.page-number{
-    text-align:center;
-    color:rgba(227,195,107,.55);
-    font-size:10px;
-    letter-spacing:4px;
-    margin-bottom:14px;
-}
-
-/* البطاقة */
-.story-card{
     position:relative;
+    padding:45px 42px 38px;
+    border:1px solid rgba(201,166,76,.32);
     background:
-        linear-gradient(145deg,
-            rgba(8,25,47,.94),
-            rgba(1,9,21,.98));
-    border:1px solid rgba(218,183,91,.2);
-    border-radius:4px;
-    padding:38px 34px 28px;
-    min-height:70vh;
+        linear-gradient(
+            145deg,
+            rgba(8,22,40,.96),
+            rgba(2,12,25,.97)
+        );
     box-shadow:
-        0 30px 90px rgba(0,0,0,.5),
-        inset 0 0 80px rgba(218,183,91,.025);
+        0 0 50px rgba(0,0,0,.35),
+        inset 0 0 40px rgba(201,166,76,.025);
 }
 
-/* زوايا فخمة */
-.story-card:before,
-.story-card:after{
+/* زوايا ذهبية */
+.story::before,
+.story::after{
     content:"";
     position:absolute;
-    width:46px;
-    height:46px;
-    pointer-events:none;
+    width:35px;
+    height:35px;
+    border-color:rgba(215,181,88,.65);
 }
 
-.story-card:before{
-    top:13px;
-    right:13px;
-    border-top:1px solid rgba(218,183,91,.5);
-    border-right:1px solid rgba(218,183,91,.5);
+.story::before{
+    top:-1px;
+    right:-1px;
+    border-top:1px solid;
+    border-right:1px solid;
 }
 
-.story-card:after{
-    bottom:13px;
-    left:13px;
-    border-bottom:1px solid rgba(218,183,91,.5);
-    border-left:1px solid rgba(218,183,91,.5);
+.story::after{
+    bottom:-1px;
+    left:-1px;
+    border-bottom:1px solid;
+    border-left:1px solid;
 }
 
 /* الصفحات */
 .page{
     display:none;
-    animation:appear .7s ease;
+    animation:fadeIn .7s ease;
 }
 
 .page.active{
     display:block;
 }
 
-@keyframes appear{
+@keyframes fadeIn{
     from{
         opacity:0;
-        transform:translateY(15px);
+        transform:translateY(10px);
     }
     to{
         opacity:1;
@@ -133,1036 +123,1039 @@ body:before{
 }
 
 /* العنوان */
-h1{
-    font-family:"Amiri",serif;
-    font-size:clamp(31px,7vw,46px);
-    font-weight:400;
-    color:#e4c46c;
+.title{
     text-align:center;
-    margin-bottom:14px;
-    text-shadow:0 0 30px rgba(228,196,108,.12);
+    color:#d8b45b;
+    font-size:34px;
+    font-weight:700;
+    margin:0 0 35px;
+    letter-spacing:.5px;
+    text-shadow:0 0 18px rgba(216,180,91,.12);
 }
 
-.title-line{
-    width:50px;
+.title::after{
+    content:"";
+    display:block;
+    width:55px;
     height:1px;
-    margin:0 auto 30px;
-    background:linear-gradient(90deg,transparent,#d4af5a,transparent);
+    background:#d8b45b;
+    margin:16px auto 0;
+    opacity:.6;
 }
 
 /* النص */
-.story-text{
-    font-family:"Amiri",serif;
+.text{
     font-size:20px;
-    line-height:2.12;
-    color:#f2efe8;
+    line-height:2.15;
+    color:#eeeae0;
+    white-space:pre-line;
 }
 
-.story-text p{
-    margin-bottom:20px;
+.text .gold{
+    color:#d9b65c;
+    text-shadow:0 0 14px rgba(217,182,92,.12);
 }
 
-.gold{
-    color:#e4c46c;
-    text-shadow:0 0 18px rgba(228,196,108,.12);
+.text .white{
+    color:#fff;
 }
 
-/* التنقل */
-.navigation{
+/* شريط التقدم */
+.progress-area{
+    margin-bottom:32px;
+}
+
+.progress-info{
     display:flex;
-    justify-content:center;
-    gap:12px;
-    margin-top:30px;
+    justify-content:space-between;
+    align-items:center;
+    color:rgba(230,218,185,.55);
+    font-size:13px;
+    margin-bottom:8px;
+}
+
+.progress{
+    width:100%;
+    height:2px;
+    background:rgba(255,255,255,.08);
+    overflow:hidden;
+}
+
+.progress-bar{
+    height:100%;
+    width:20%;
+    background:#d8b45b;
+    transition:width .5s ease;
+    box-shadow:0 0 10px rgba(216,180,91,.35);
+}
+
+/* الأزرار */
+.buttons{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:15px;
+    margin-top:38px;
 }
 
 .nav-btn{
-    min-width:120px;
-    padding:11px 22px;
-    border:1px solid rgba(218,183,91,.38);
-    background:rgba(3,13,28,.8);
-    color:#e4c46c;
-    font-family:"Cairo",sans-serif;
-    font-size:13px;
+    background:transparent;
+    color:#d8b45b;
+    border:1px solid rgba(216,180,91,.42);
+    padding:10px 22px;
+    font-family:"Amiri",serif;
+    font-size:16px;
     cursor:pointer;
-    border-radius:2px;
     transition:.3s ease;
 }
 
 .nav-btn:hover{
-    background:rgba(218,183,91,.08);
-    border-color:rgba(218,183,91,.75);
-    box-shadow:0 0 25px rgba(218,183,91,.08);
+    background:rgba(216,180,91,.08);
+    border-color:#d8b45b;
+    box-shadow:0 0 18px rgba(216,180,91,.08);
 }
 
 .nav-btn:disabled{
-    opacity:.22;
-    cursor:default;
+    opacity:0;
+    pointer-events:none;
 }
 
-/* منطقة السؤال */
+/* الصفحة الأخيرة */
 .question-box{
-    position:relative;
     margin-top:28px;
-    padding:22px 20px 18px;
-    background:
-        linear-gradient(145deg,
-        rgba(15,34,58,.72),
-        rgba(2,12,25,.88));
-    border:1px solid rgba(218,183,91,.3);
-    box-shadow:
-        inset 0 0 35px rgba(218,183,91,.025),
-        0 15px 40px rgba(0,0,0,.22);
-}
-
-.question-box:before{
-    content:"";
-    position:absolute;
-    top:-1px;
-    right:22px;
-    width:55px;
-    height:1px;
-    background:#e4c46c;
-}
-
-.question-label{
-    text-align:center;
-    color:#e4c46c;
-    font-family:"Amiri",serif;
-    font-size:19px;
-    margin-bottom:13px;
-}
-
-.question-sub{
-    text-align:center;
-    color:rgba(255,255,255,.48);
-    font-size:10px;
-    margin-bottom:14px;
 }
 
 textarea{
-    display:block;
     width:100%;
-    height:82px;
-    min-height:82px;
-    max-height:160px;
+    min-height:125px;
     resize:vertical;
-
-    border:1px solid rgba(218,183,91,.2);
-    border-radius:2px;
-
-    background:rgba(0,7,17,.7);
-    color:#fff;
-
-    padding:13px 15px;
+    background:rgba(1,9,19,.7);
+    border:1px solid rgba(216,180,91,.38);
+    color:#f5f0df;
+    outline:none;
+    padding:18px 20px;
     font-family:"Amiri",serif;
     font-size:18px;
     line-height:1.8;
-
-    outline:none;
+    text-align:right;
     transition:.3s ease;
 }
 
 textarea::placeholder{
-    color:rgba(255,255,255,.28);
+    color:rgba(238,234,224,.38);
 }
 
 textarea:focus{
-    border-color:rgba(228,196,108,.65);
-    box-shadow:0 0 22px rgba(228,196,108,.06);
+    border-color:#d8b45b;
+    box-shadow:0 0 20px rgba(216,180,91,.08);
+}
+
+/* زر الإرسال المميز */
+.send-wrap{
+    display:flex;
+    justify-content:center;
+    margin-top:18px;
 }
 
 .send-btn{
-    display:block;
-    margin:14px auto 0;
-    padding:9px 28px;
-
-    border:1px solid rgba(218,183,91,.45);
-    background:linear-gradient(
-        135deg,
-        rgba(218,183,91,.12),
-        rgba(218,183,91,.035)
-    );
-
-    color:#e4c46c;
-    font-family:"Cairo",sans-serif;
-    font-size:12px;
+    position:relative;
+    min-width:125px;
+    padding:10px 25px;
+    border:1px solid rgba(216,180,91,.65);
+    background:
+        linear-gradient(
+            135deg,
+            rgba(216,180,91,.09),
+            rgba(216,180,91,.02)
+        );
+    color:#e2c36c;
+    font-family:"Amiri",serif;
+    font-size:17px;
     cursor:pointer;
-    border-radius:2px;
-    transition:.3s;
+    overflow:hidden;
+    transition:.35s ease;
+}
+
+.send-btn::before{
+    content:"";
+    position:absolute;
+    top:0;
+    right:-100%;
+    width:100%;
+    height:100%;
+    background:linear-gradient(
+        90deg,
+        transparent,
+        rgba(255,255,255,.12),
+        transparent
+    );
+    transition:.6s ease;
+}
+
+.send-btn:hover::before{
+    right:100%;
 }
 
 .send-btn:hover{
-    background:rgba(218,183,91,.14);
-    box-shadow:0 0 22px rgba(218,183,91,.08);
+    border-color:#e4c66e;
+    box-shadow:0 0 20px rgba(216,180,91,.12);
+    transform:translateY(-1px);
 }
 
-/* =========================
-   مشغل الموسيقى
-========================= */
+.send-btn:disabled{
+    opacity:.65;
+    cursor:default;
+    transform:none;
+}
 
+/* رسالة الإرسال */
+.success-message{
+    text-align:center;
+    color:#e4c46c;
+    font-family:"Amiri",serif;
+    font-size:17px;
+    margin-top:13px;
+    opacity:0;
+    transform:translateY(5px);
+    transition:.5s ease;
+    height:0;
+    overflow:hidden;
+}
+
+.success-message.show{
+    opacity:1;
+    transform:translateY(0);
+    height:auto;
+}
+
+/* مشغل الموسيقى */
 .music-player{
     position:fixed;
-    left:16px;
-    bottom:16px;
+    left:15px;
+    bottom:15px;
     z-index:1000;
 
     display:flex;
     align-items:center;
-    gap:10px;
+    gap:9px;
 
-    padding:10px 12px;
+    padding:8px 10px;
 
-    background:
-        linear-gradient(
-            135deg,
-            rgba(3,14,29,.96),
-            rgba(7,22,40,.94)
-        );
-
-    border:1px solid rgba(218,183,91,.3);
-    border-radius:3px;
+    background:rgba(3,12,24,.94);
+    border:1px solid rgba(216,180,91,.35);
 
     box-shadow:
-        0 15px 40px rgba(0,0,0,.4),
-        inset 0 0 25px rgba(218,183,91,.025);
+        0 8px 30px rgba(0,0,0,.35),
+        inset 0 0 15px rgba(216,180,91,.025);
 
-    backdrop-filter:blur(12px);
+    backdrop-filter:blur(10px);
+    -webkit-backdrop-filter:blur(10px);
+
+    border-radius:3px;
 }
 
-.music-button{
-    width:30px;
-    height:30px;
+/* أيقونة الموسيقى */
+.music-icon{
+    width:28px;
+    height:28px;
 
     display:flex;
     align-items:center;
     justify-content:center;
 
-    border:1px solid rgba(228,196,108,.4);
-    background:rgba(228,196,108,.06);
+    color:#d8b45b;
+    font-size:15px;
 
-    color:#e4c46c;
-    font-size:12px;
-
-    cursor:pointer;
+    border:1px solid rgba(216,180,91,.38);
     border-radius:50%;
+
+    flex-shrink:0;
 }
 
-.music-details{
-    min-width:125px;
+/* معلومات الأغنية */
+.music-info{
     display:flex;
     flex-direction:column;
-    line-height:1.35;
+    min-width:95px;
 }
 
-.music-status{
-    color:rgba(255,255,255,.42);
-    font-size:8px;
-    letter-spacing:1px;
+.music-label{
+    color:rgba(238,234,224,.5);
+    font-size:10px;
+    line-height:1.2;
 }
 
 .music-name{
-    color:#e4c46c;
-    font-size:11px;
+    color:#d8b45b;
+    font-size:13px;
+    line-height:1.4;
 }
 
-.volume-wrap{
-    display:flex;
-    align-items:center;
-    gap:5px;
+/* زر التشغيل */
+.music-toggle{
+    background:none;
+    border:none;
+    color:#d8b45b;
+    cursor:pointer;
+    font-size:13px;
+    padding:2px;
 }
 
-.volume-icon{
-    color:rgba(228,196,108,.75);
-    font-size:11px;
-}
-
-.volume{
-    width:58px;
+/* التحكم بالصوت */
+.volume-control{
+    width:65px;
     height:3px;
-    accent-color:#d8b65d;
+    accent-color:#d8b45b;
     cursor:pointer;
 }
 
-/* موجة صغيرة */
-.music-bars{
-    display:flex;
-    align-items:flex-end;
-    gap:2px;
-    height:15px;
-    margin-right:3px;
-}
-
-.music-bars span{
-    width:2px;
-    height:5px;
-    background:#d9b85e;
-    opacity:.75;
-}
-
-.music-bars.playing span:nth-child(1){
-    animation:bar .7s infinite alternate;
-}
-
-.music-bars.playing span:nth-child(2){
-    animation:bar .5s .1s infinite alternate;
-}
-
-.music-bars.playing span:nth-child(3){
-    animation:bar .8s .2s infinite alternate;
-}
-
-.music-bars.playing span:nth-child(4){
-    animation:bar .6s .05s infinite alternate;
-}
-
-@keyframes bar{
-    from{height:4px}
-    to{height:14px}
-}
-
-/* رسالة الموسيقى */
-.music-hint{
-    position:fixed;
-    left:16px;
-    bottom:82px;
-    z-index:999;
-
-    padding:8px 12px;
-
-    background:rgba(2,10,23,.94);
-    border:1px solid rgba(218,183,91,.22);
-
-    color:rgba(255,255,255,.72);
-    font-size:10px;
-
-    opacity:0;
-    transform:translateY(8px);
-    transition:.4s ease;
-    pointer-events:none;
-}
-
-.music-hint.show{
-    opacity:1;
-    transform:translateY(0);
-}
-
-/* الجوال */
+/* موبايل */
 @media(max-width:600px){
 
-    .app{
-        padding:15px 11px 105px;
+    .wrapper{
+        padding:25px 14px 90px;
     }
 
-    .story-card{
-        padding:32px 20px 27px;
-        min-height:76vh;
+    .story{
+        padding:32px 22px 28px;
     }
 
-    .story-text{
+    .title{
+        font-size:29px;
+        margin-bottom:27px;
+    }
+
+    .text{
         font-size:18px;
-        line-height:2.04;
+        line-height:2.05;
     }
 
-    h1{
-        font-size:32px;
+    .buttons{
+        margin-top:30px;
     }
 
-    .title-line{
-        margin-bottom:25px;
-    }
-
-    .question-box{
-        padding:19px 15px 16px;
+    .nav-btn{
+        padding:8px 17px;
+        font-size:15px;
     }
 
     textarea{
-        height:78px;
-        min-height:78px;
+        min-height:115px;
         font-size:17px;
     }
 
     .music-player{
-        left:9px;
-        bottom:9px;
-        padding:8px 9px;
+        left:10px;
+        bottom:10px;
+        padding:6px 8px;
         gap:7px;
     }
 
-    .music-details{
-        min-width:105px;
+    .music-icon{
+        width:25px;
+        height:25px;
+        font-size:13px;
     }
 
-    .volume{
-        width:45px;
+    .music-info{
+        min-width:78px;
     }
 
-    .music-hint{
-        left:9px;
-        bottom:67px;
+    .music-label{
+        font-size:9px;
+    }
+
+    .music-name{
+        font-size:12px;
+    }
+
+    .volume-control{
+        width:50px;
     }
 }
+
 </style>
 </head>
 
 <body>
 
-<div class="app">
+<div class="wrapper">
 
-    <div class="progress-wrap">
-        <div class="progress" id="progress"></div>
+<main class="story">
+
+    <!-- شريط التقدم -->
+    <div class="progress-area">
+
+        <div class="progress-info">
+            <span id="progressText">الصفحة 1 من 5</span>
+            <span>...</span>
+        </div>
+
+        <div class="progress">
+            <div class="progress-bar" id="progressBar"></div>
+        </div>
+
     </div>
 
-    <div class="page-number" id="pageNumber">
-        01 / 05
-    </div>
 
-    <div class="story-card">
+    <!-- الصفحة 1 -->
+    <section class="page active">
 
-        <!-- الصفحة الأولى -->
-        <section class="page active">
+        <h1 class="title">يومٌ آخر</h1>
 
-            <h1>يومٌ آخر</h1>
-            <div class="title-line"></div>
-
-            <div class="story-text">
-                <p>
+        <div class="text">
 إذًا...
 اخترتِ أن تكملي.
 وربما لم يكن هناك سبب واضح.
 مجرد فضول صغير... دفعكِ إلى الضغط على تلك الكلمة.
 <span class="gold">أكمل الحكاية.</span>
+
 وهكذا، من دون أن تشعري، أصبح لكِ الآن مكان صغير داخل قصة لم تكن موجودة في صباح ذلك اليوم.
+
 في الخارج... العالم مستمر كعادته.
 السيارات تمضي.
 الناس مستعجلون.
 الساعات تتحرك.
 والعمل ينتظر.
 وكل شيء يبدو طبيعيًا جدًا.
+
 لكن في مكان ما بين كل هذه التفاصيل، بقي شيء واحد مختلف.
+
 أنتِ تعرفين أن هناك صفحة أخرى.
 وربما لهذا السبب، عندما تكملين يومكِ، ستشعرين للحظة أن اليوم يحمل شيئًا صغيرًا لا تعرفين اسمه.
+
 ليس شيئًا كبيرًا.
 ولا حدثًا يستحق أن يتوقف العالم من أجله.
 مجرد لحظة لطيفة... وصلت في الوقت الذي احتجتِها فيه.
+
 وربما هذه الأشياء هي التي نحتاجها أكثر مما نعترف.
+
 لأننا نقضي وقتًا طويلًا في التفكير بما يجب أن نفعله، وما يجب أن ننجزه، وما ينتظرنا غدًا...
 وننسى أن الإنسان يستحق أحيانًا شيئًا جميلًا لا يطلب منه شيئًا.
-كوب قهوة.
+
+<span class="gold">كوب قهوة.
 كلمة طيبة.
 لحظة هادئة.
-أو حتى سبب صغير يجعله يبتسم في منتصف يوم مزدحم.
+أو حتى سبب صغير يجعله يبتسم في منتصف يوم مزدحم.</span>
+
 وربما...
-<span class="gold">كانت تلك اللحظة مجرد بداية.</span>
-                </p>
-            </div>
+كانت تلك اللحظة مجرد بداية.
+        </div>
 
-        </section>
+    </section>
 
 
-        <!-- الصفحة الثانية -->
-        <section class="page">
+    <!-- الصفحة 2 -->
+    <section class="page">
 
-            <h1>أشياء لا نقولها</h1>
-            <div class="title-line"></div>
+        <h1 class="title">أشياء لا نقولها</h1>
 
-            <div class="story-text">
-                <p>
+        <div class="text">
 في يوم طويل...
 لا نحتاج دائمًا إلى أن نقول:
 «أنا متعبة.»
+
 أحيانًا يكفي أن تستمرّي.
 تكملين ما عليكِ.
 تردين.
 تعملين.
 تضحكين.
 وتقولين إن كل شيء بخير.
+
 لكن هناك أشياء صغيرة لا تحتاج إلى كلام.
+
 مثل عينيكِ.
+
 في ذلك اليوم، كان التعب ظاهرًا فيهما قليلًا.
 ليس بطريقة درامية.
 ولا شيئًا يستحق القلق.
 فقط ذلك الأثر البسيط الذي يتركه يوم طويل على وجه صاحبه.
+
 وربما لم تنتبهي له أصلًا.
 وربما انتبهتِ... ثم أكملتِ يومكِ كالمعتاد.
+
 لكن الجميل في الأمر أن هذا لا يقلل من قوتكِ.
 بالعكس.
+
 هناك شيء جميل في الشخص الذي يتعب...
 ثم يستمر.
+
 في الشخص الذي لديه ألف شيء في رأسه ومع ذلك يحاول أن ينجز ما يستطيع.
+
 لذلك...
+
 <span class="gold">لا تستهيني بالجهد الذي تبذلينه في الأيام التي لا يراه فيها أحد.</span>
+
 كل خطوة صغيرة تحسب.
 وكل مرة تختارين فيها أن تكملي بدل أن تستسلمي للتعب، أنتِ تقتربين من شيء لم تصلي إليه بعد.
+
 ربما حلم.
 ربما هدف.
 وربما ببساطة... نسخة منكِ ستنظر يومًا إلى هذه الأيام وتقول:
-«الحمد لله أني كملت.»
+
+<span class="gold">«الحمد لله أني كملت.»</span>
+
 أما الآن...
-فخذي نفسًا.
+
+خذي نفسًا.
 وكملي يومكِ.
+
 ليس مطلوبًا منكِ أن تكوني قوية طوال الوقت.
+
 فقط...
+
 <span class="gold">لا تتوقفي عن السير.</span>
-                </p>
-            </div>
+        </div>
 
-        </section>
+    </section>
 
 
-        <!-- الصفحة الثالثة -->
-        <section class="page">
+    <!-- الصفحة 3 -->
+    <section class="page">
 
-            <h1>المدينة التي لا ننتبه لها</h1>
-            <div class="title-line"></div>
+        <h1 class="title">المدينة التي لا ننتبه لها</h1>
 
-            <div class="story-text">
-                <p>
+        <div class="text">
 في المساء...
 تتغير الأشياء قليلًا.
+
 نفس الشوارع، لكنها تبدو مختلفة تحت الأضواء.
 نفس الوجوه، لكنها تختفي سريعًا وسط الزحام.
 نفس المدينة...
 ومع ذلك، هناك دائمًا شيء جديد لم نلاحظه بالأمس.
+
 وربما هذا ما حدث لكِ.
+
 بعد القهوة، بدأتِ تنظرين إلى يومكِ بطريقة مختلفة.
 ليس لأن شيئًا خارقًا حدث.
 وإنما لأنكِ توقفتِ للحظة.
+
 وتساءلتِ:
-كم تفصيلًا صغيرًا يحدث في حياتنا ونحن مشغولون جدًا لدرجة أننا لا نراه؟
+
+<span class="gold">كم تفصيلًا صغيرًا يحدث في حياتنا ونحن مشغولون جدًا لدرجة أننا لا نراه؟</span>
+
 شخص يبتسم لكِ في الطريق.
 أغنية تأتي في اللحظة المناسبة.
 ضوء ينعكس على نافذة.
 كلمة تسمعينها بالصدفة وتبقى معكِ لبقية اليوم.
+
 أشياء صغيرة جدًا...
 لكنها تجعل الحياة أكثر من مجرد قائمة مهام.
+
 وربما هنا تبدأ اللعبة.
+
 ليس عليكِ أن تبحثي عن شيء.
 فقط...
+
 <span class="gold">انتبهي.</span>
+
 أحيانًا تكون الإشارة في أكثر الأماكن عادية.
+
 وأحيانًا تكون أمامكِ منذ البداية، لكنكِ لم تنظري إليها بالطريقة الصحيحة.
+
 وربما ستكتشفينها بالصدفة.
 وربما ستضحكين عندما تعرفينها.
 وربما لن تعرفيها أصلًا.
+
 لا بأس.
+
 فهذه ليست مسابقة.
 هذه حكاية.
+
 <span class="gold">والحكايات الجميلة لا تعطيكِ كل شيء دفعة واحدة.</span>
-                </p>
-            </div>
+        </div>
 
-        </section>
+    </section>
 
 
-        <!-- الصفحة الرابعة -->
-        <section class="page">
+    <!-- الصفحة 4 -->
+    <section class="page">
 
-            <h1>خطوة صغيرة</h1>
-            <div class="title-line"></div>
+        <h1 class="title">خطوة صغيرة</h1>
 
-            <div class="story-text">
-                <p>
+        <div class="text">
 ثم يأتي ذلك الشعور...
+
 عندما يبدأ الفضول يصبح جزءًا من يومكِ.
+
 ليس فضولًا مزعجًا.
 ذلك النوع الجميل الذي يجعلكِ تتساءلين:
-«طيب... وش بعد؟»
+
+<span class="gold">«طيب... وش بعد؟»</span>
+
 ربما تضحكين على نفسكِ قليلًا.
 كيف استطاع شيء بسيط أن يجعلكِ تفكرين هكذا؟
+
 كوب قهوة فقط.
 ثم صفحة.
 ثم صفحة أخرى.
+
 وفجأة...
 أصبحت هناك حكاية صغيرة لا يعرف عنها العالم شيئًا.
+
 وربما هذا أجمل ما فيها.
+
 في عالم كبير، يعرف فيه الجميع تقريبًا كل شيء عن الجميع، تبقى بعض الأشياء أجمل عندما تكون صغيرة وهادئة.
+
 شيء لا يحتاج جمهورًا.
 ولا يحتاج شرحًا.
 ولا يحتاج أن يفهمه أحد غيركِ.
+
 <span class="gold">سر صغير... في عالم كبير.</span>
+
 وربما هذا السر لن يبقى مجرد كلمات على شاشة.
+
 ربما تكبر الحكاية قليلًا.
 وربما تأخذكِ إلى أماكن لم تتوقعي الوصول إليها.
+
 لكن لن أخبركِ كيف.
+
 لأن أجمل جزء في الرحلة هو اللحظة التي تكتشفين فيها الشيء بنفسكِ.
+
 لذلك...
+
 لا تبحثي عن الإجابة.
+
 عيشي يومكِ.
 اجتهدي.
 اضحكي أكثر.
 اهتمي بالأشياء التي تريدين الوصول إليها.
+
 وإذا جاءت لحظة صغيرة جعلتكِ سعيدة...
 لا تمرّي فوقها بسرعة.
+
 توقفي عندها قليلًا.
+
 <span class="gold">ربما تكون الحكاية قد مرت من هناك.</span>
-                </p>
-            </div>
+        </div>
 
-        </section>
+    </section>
 
 
-        <!-- الصفحة الخامسة -->
-        <section class="page">
+    <!-- الصفحة 5 -->
+    <section class="page">
 
-            <h1>ماذا سيأتي بعد؟</h1>
-            <div class="title-line"></div>
+        <h1 class="title">ماذا سيأتي بعد؟</h1>
 
-            <div class="story-text">
-
-                <p>
+        <div class="text">
 والآن...
 أنتِ هنا.
+
 بعد كوب القهوة.
 وبعد يومٍ آخر.
 وبعد كل تلك التفاصيل الصغيرة التي ربما لم تكوني ستلاحظينها لو لم تبدأ الحكاية.
+
 الغريب...
 أنكِ لم تحصلي على إجابة واحدة واضحة.
+
 ومع ذلك، حصلتِ على شيء آخر.
-فضول.
+
+<span class="gold">فضول.
 وربما ابتسامة.
-وربما لحظة هدوء وسط يوم لم يكن هادئًا.
+وربما لحظة هدوء وسط يوم لم يكن هادئًا.</span>
+
 وربما... بدأتِ تشعرين أن هناك شيئًا ينتظركِ في الصفحة القادمة.
+
 لكن قبل أن نصل إليها...
+
 هناك سؤال صغير.
+
 لا يحتاج إجابة مثالية.
 ولا يحتاج منكِ أن تعرفي إلى أين ستأخذكِ الحكاية.
+
 فقط تخيلي...
+
 أن هذه القصة أصبحت جزءًا صغيرًا من أيامكِ.
 وأن كل صفحة قادمة يمكن أن تحمل معها شيئًا جديدًا.
+
 <span class="gold">ماذا تتمنين أن تجدي في الصفحة القادمة؟</span>
+
 كلمة؟
 مكان؟
 موقف؟
 مفاجأة؟
 أو ربما شيئًا لا تعرفين كيف تصفينه بعد؟
+
 اكتبي أول شيء جاء في بالكِ.
 لا تفكري كثيرًا.
+
 لأن بعض الأمنيات، عندما نحاول ترتيبها بالكلمات، تفقد شيئًا من صدقها.
-                </p>
-
-                <!-- خانة مميزة -->
-                <div class="question-box">
-
-                    <div class="question-label">
-                        اكتبي هنا...
-                    </div>
-
-                    <div class="question-sub">
-                        أول شيء جاء في بالكِ
-                    </div>
-
-                    <form
-                        action="https://formspree.io/f/xbgljlrp"
-                        method="POST"
-                    >
-
-                        <textarea
-                            name="message"
-                            placeholder="[ اكتبي هنا... ]"
-                            required
-                        ></textarea>
-
-                        <input
-                            type="hidden"
-                            name="_subject"
-                            value="إجابة القصة"
-                        >
-
-                        <button
-                            type="submit"
-                            class="send-btn"
-                        >
-                            إرسال
-                        </button>
-
-                    </form>
-
-                </div>
-
-                <p style="margin-top:25px;">
-وبعدها...
-لا تبحثي عن الصفحة التالية.
-دعِيها هي تأتي إليكِ.
-فربما...
-في عالم كبير مليء بالأشياء،
-<span class="gold">أجمل الحكايات تبدأ عندما لا نعرف ماذا سيحدث بعد ذلك.</span>
-<span class="gold">سر صغير... في عالم كبير.</span>
-والحكاية مستمرة.
-                </p>
-
-            </div>
-
-        </section>
-
-
-        <!-- أزرار التنقل -->
-        <div class="navigation">
-
-            <button
-                class="nav-btn"
-                id="prevBtn"
-                onclick="previousPage()"
-                disabled
-            >
-                السابق
-            </button>
-
-            <button
-                class="nav-btn"
-                id="nextBtn"
-                onclick="nextPage()"
-            >
-                أكمل الحكاية
-            </button>
 
         </div>
 
+
+        <!-- خانة الإرسال -->
+        <div class="question-box">
+
+            <form id="storyForm">
+
+                <textarea
+                    name="message"
+                    placeholder="[ اكتبي هنا... ]"
+                    required
+                ></textarea>
+
+                <input
+                    type="hidden"
+                    name="_subject"
+                    value="إجابة القصة"
+                >
+
+                <div class="send-wrap">
+                    <button type="submit" class="send-btn">
+                        إرسال
+                    </button>
+                </div>
+
+                <div id="successMessage" class="success-message">
+                    وصلت...
+                </div>
+
+            </form>
+
+        </div>
+
+
+        <div class="text" style="margin-top:28px;">
+وبعدها...
+
+لا تبحثي عن الصفحة التالية.
+
+دعيها هي تأتي إليكِ.
+
+فربما...
+
+في عالم كبير مليء بالأشياء،
+أجمل الحكايات تبدأ عندما لا نعرف ماذا سيحدث بعد ذلك.
+
+<span class="gold">سر صغير... في عالم كبير.</span>
+
+والحكاية مستمرة.
+        </div>
+
+    </section>
+
+
+    <!-- أزرار التنقل -->
+    <div class="buttons">
+
+        <button
+            class="nav-btn"
+            id="prevBtn"
+            onclick="changePage(-1)"
+            disabled
+        >
+            السابق
+        </button>
+
+        <button
+            class="nav-btn"
+            id="nextBtn"
+            onclick="changePage(1)"
+        >
+            التالي
+        </button>
+
     </div>
+
+</main>
+
 </div>
 
 
-<!-- =========================
-     الأغنية
-========================= -->
-
-<audio
-    id="music"
-    loop
-    preload="auto"
->
-    <source src="music.mp3" type="audio/mpeg">
-</audio>
-
-
-<!-- مشغل الموسيقى -->
+<!-- الموسيقى -->
 <div class="music-player">
 
+    <div class="music-icon">
+        ♪
+    </div>
+
+    <div class="music-info">
+        <span class="music-label">الموسيقى مستمرة</span>
+        <span class="music-name">Cinnamon Girl</span>
+    </div>
+
     <button
-        class="music-button"
-        id="musicButton"
-        onclick="toggleMusic()"
-        aria-label="تشغيل أو إيقاف الموسيقى"
+        class="music-toggle"
+        id="musicToggle"
+        type="button"
+        aria-label="تشغيل وإيقاف الموسيقى"
     >
         ▶
     </button>
 
-    <div class="music-details">
-
-        <span
-            class="music-status"
-            id="musicStatus"
-        >
-            MUSIC • READY
-        </span>
-
-        <span class="music-name">
-            Cinnamon Girl
-        </span>
-
-    </div>
-
-    <div
-        class="music-bars"
-        id="musicBars"
+    <input
+        class="volume-control"
+        id="volumeControl"
+        type="range"
+        min="0"
+        max="1"
+        step="0.01"
+        value="0.25"
+        aria-label="مستوى الصوت"
     >
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-    </div>
-
-    <div class="volume-wrap">
-
-        <span class="volume-icon">
-            ♪
-        </span>
-
-        <input
-            class="volume"
-            id="volume"
-            type="range"
-            min="0"
-            max="1"
-            step="0.01"
-            value="0.25"
-            aria-label="مستوى الصوت"
-        >
-
-    </div>
 
 </div>
 
 
-<div
-    class="music-hint"
-    id="musicHint"
+<audio
+    id="backgroundMusic"
+    src="music.mp3"
+    loop
+    preload="auto"
 >
-    ♪ الموسيقى تعمل بالخلفية — يمكنك التحكم بالصوت
-</div>
+</audio>
 
 
 <script>
 
+/* =========================
+   الصفحات
+========================= */
+
 let currentPage = 0;
 
 const pages = document.querySelectorAll(".page");
+const prevBtn = document.getElementById("prevBtn");
+const nextBtn = document.getElementById("nextBtn");
+const progressBar = document.getElementById("progressBar");
+const progressText = document.getElementById("progressText");
 
-const progress =
-    document.getElementById("progress");
+function updatePage(){
 
-const pageNumber =
-    document.getElementById("pageNumber");
-
-const prevBtn =
-    document.getElementById("prevBtn");
-
-const nextBtn =
-    document.getElementById("nextBtn");
-
-const music =
-    document.getElementById("music");
-
-const musicButton =
-    document.getElementById("musicButton");
-
-const musicStatus =
-    document.getElementById("musicStatus");
-
-const musicBars =
-    document.getElementById("musicBars");
-
-const musicHint =
-    document.getElementById("musicHint");
-
-const volume =
-    document.getElementById("volume");
-
-
-/* مستوى الصوت */
-music.volume = 0.25;
-
-
-/* محاولة تشغيل الموسيقى */
-function startMusic(){
-
-    music.play()
-    .then(() => {
-
-        musicButton.textContent = "Ⅱ";
-        musicStatus.textContent = "MUSIC • PLAYING";
-
-        musicBars.classList.add("playing");
-
-        showMusicHint();
-
-    })
-    .catch(() => {
-
-        /*
-        بعض المتصفحات تمنع الصوت التلقائي.
-        سيتم تشغيله عند أول لمسة/ضغطة.
-        */
-
-        musicStatus.textContent =
-            "TAP TO PLAY";
-
+    pages.forEach((page,index)=>{
+        page.classList.toggle("active",index === currentPage);
     });
+
+    prevBtn.disabled = currentPage === 0;
+
+    if(currentPage === pages.length - 1){
+        nextBtn.style.opacity = "0";
+        nextBtn.style.pointerEvents = "none";
+    }else{
+        nextBtn.style.opacity = "1";
+        nextBtn.style.pointerEvents = "auto";
+    }
+
+    const percent =
+        ((currentPage + 1) / pages.length) * 100;
+
+    progressBar.style.width = percent + "%";
+
+    progressText.textContent =
+        "الصفحة " + (currentPage + 1) + " من " + pages.length;
+
+    window.scrollTo({
+        top:0,
+        behavior:"smooth"
+    });
+}
+
+function changePage(direction){
+
+    const newPage = currentPage + direction;
+
+    if(newPage < 0 || newPage >= pages.length){
+        return;
+    }
+
+    currentPage = newPage;
+
+    updatePage();
+
+    startMusic();
 
 }
 
 
-/* زر الموسيقى */
+/* =========================
+   الموسيقى
+========================= */
+
+const music =
+    document.getElementById("backgroundMusic");
+
+const musicToggle =
+    document.getElementById("musicToggle");
+
+const volumeControl =
+    document.getElementById("volumeControl");
+
+
+music.volume = 0.25;
+
+
+function startMusic(){
+
+    music.play()
+        .then(()=>{
+            musicToggle.textContent = "Ⅱ";
+        })
+        .catch(()=>{
+            /*
+              بعض المتصفحات تمنع تشغيل الصوت
+              قبل أول تفاعل من الزائرة.
+              بمجرد الضغط على الصفحة أو التالي
+              سيبدأ التشغيل.
+            */
+        });
+
+}
+
+
 function toggleMusic(){
 
     if(music.paused){
 
-        startMusic();
+        music.play()
+            .then(()=>{
+                musicToggle.textContent = "Ⅱ";
+            })
+            .catch(()=>{});
 
     }else{
 
         music.pause();
 
-        musicButton.textContent = "▶";
-        musicStatus.textContent = "MUSIC • PAUSED";
-
-        musicBars.classList.remove("playing");
+        musicToggle.textContent = "▶";
 
     }
 
 }
 
 
-/* إظهار رسالة صغيرة */
-function showMusicHint(){
-
-    musicHint.classList.add("show");
-
-    setTimeout(() => {
-
-        musicHint.classList.remove("show");
-
-    },5000);
-
-}
+musicToggle.addEventListener(
+    "click",
+    toggleMusic
+);
 
 
-/* التحكم بالصوت */
-volume.addEventListener("input",function(){
+volumeControl.addEventListener(
+    "input",
+    function(){
 
-    music.volume = Number(this.value);
+        music.volume = this.value;
 
-});
+    }
+);
 
 
 /*
-تشغيل الموسيقى مع أول تفاعل
-حتى لا يمنعها المتصفح.
+   محاولة تشغيل الموسيقى مباشرة
 */
-
-let musicStarted = false;
-
-function firstInteraction(){
-
-    if(!musicStarted){
-
-        musicStarted = true;
+window.addEventListener(
+    "load",
+    function(){
 
         startMusic();
 
     }
+);
 
-}
 
-
+/*
+   تشغيل الموسيقى عند أول تفاعل
+   إذا منع المتصفح التشغيل التلقائي.
+*/
 document.addEventListener(
-    "pointerdown",
-    firstInteraction,
+    "click",
+    function(){
+
+        if(music.paused){
+            startMusic();
+        }
+
+    },
     {once:true}
 );
 
 
-/* الصفحة التالية */
-function nextPage(){
+/* =========================
+   إرسال الإجابة
+========================= */
 
-    firstInteraction();
+const storyForm =
+    document.getElementById("storyForm");
 
-    if(currentPage < pages.length - 1){
-
-        currentPage++;
-
-        updatePage();
-
-    }
-
-}
+const successMessage =
+    document.getElementById("successMessage");
 
 
-/* الصفحة السابقة */
-function previousPage(){
-
-    if(currentPage > 0){
-
-        currentPage--;
-
-        updatePage();
-
-    }
-
-}
-
-
-/* تحديث الصفحة */
-function updatePage(){
-
-    pages.forEach((page,index) => {
-
-        page.classList.toggle(
-            "active",
-            index === currentPage
-        );
-
-    });
-
-
-    const percentage =
-        ((currentPage + 1) / pages.length) * 100;
-
-    progress.style.width =
-        percentage + "%";
-
-
-    pageNumber.textContent =
-        String(currentPage + 1).padStart(2,"0")
-        + " / "
-        + String(pages.length).padStart(2,"0");
-
-
-    prevBtn.disabled =
-        currentPage === 0;
-
-
-    if(currentPage === pages.length - 1){
-
-        nextBtn.style.display = "none";
-
-    }else{
-
-        nextBtn.style.display = "inline-block";
-
-    }
-
-}
-
-
-/* منع الإرسال الفارغ */
-const form =
-    document.querySelector("form");
-
-form.addEventListener("submit",function(e){
-
-    const textarea =
-        this.querySelector("textarea");
-
-    if(!textarea.value.trim()){
+storyForm.addEventListener(
+    "submit",
+    async function(e){
 
         e.preventDefault();
 
-        textarea.focus();
+        const textarea =
+            this.querySelector("textarea");
+
+        const button =
+            this.querySelector(".send-btn");
+
+        if(!textarea.value.trim()){
+
+            textarea.focus();
+
+            return;
+
+        }
+
+        button.disabled = true;
+        button.textContent = "جارٍ الإرسال...";
+
+        try{
+
+            const response =
+                await fetch(
+                    "https://formspree.io/f/xbgljlrp",
+                    {
+                        method:"POST",
+                        body:new FormData(this),
+                        headers:{
+                            "Accept":"application/json"
+                        }
+                    }
+                );
+
+
+            if(response.ok){
+
+                textarea.value = "";
+
+                button.textContent = "تم الإرسال ✓";
+
+                successMessage.classList.add("show");
+
+            }else{
+
+                button.disabled = false;
+
+                button.textContent = "إرسال";
+
+                alert(
+                    "حدث خطأ، حاولي مرة أخرى."
+                );
+
+            }
+
+        }catch(error){
+
+            button.disabled = false;
+
+            button.textContent = "إرسال";
+
+            alert(
+                "تأكدي من الاتصال بالإنترنت وحاولي مرة أخرى."
+            );
+
+        }
 
     }
-
-});
-
-
-/*
-محاولة تشغيل صامتة عند فتح الموقع.
-إذا سمح المتصفح، تبدأ الموسيقى.
-إذا لم يسمح، أول لمسة تشغلها.
-*/
-
-music.muted = true;
-
-music.play()
-.then(() => {
-
-    music.muted = false;
-
-    musicButton.textContent = "Ⅱ";
-    musicStatus.textContent = "MUSIC • PLAYING";
-
-    musicBars.classList.add("playing");
-
-})
-.catch(() => {
-
-    music.muted = false;
-
-    musicStatus.textContent =
-        "TAP TO PLAY";
-
-});
+);
 
 
+/* تشغيل أولي */
 updatePage();
 
 </script>
