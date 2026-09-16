@@ -1,0 +1,646 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>حكاية القهوة</title>
+
+<style>
+*{box-sizing:border-box}
+
+body{
+  margin:0;
+  min-height:100vh;
+  background:linear-gradient(135deg,#100d18,#24172d,#0b0a10);
+  color:#f5eee9;
+  font-family:Tahoma,Arial,sans-serif;
+  padding:20px;
+}
+
+.story{
+  max-width:760px;
+  margin:auto;
+}
+
+.card{
+  min-height:620px;
+  padding:35px;
+  border-radius:28px;
+  background:rgba(20,17,27,.88);
+  box-shadow:0 25px 80px #0008;
+  border:1px solid #ffffff18;
+}
+
+.progress{
+  height:3px;
+  background:#ffffff12;
+  margin-bottom:30px;
+}
+
+.bar{
+  height:100%;
+  background:#d9ad78;
+  width:20%;
+  transition:.4s;
+}
+
+.page{
+  display:none;
+  animation:fade .6s;
+}
+
+.page.active{
+  display:flex;
+  flex-direction:column;
+  min-height:540px;
+}
+
+@keyframes fade{
+  from{
+    opacity:0;
+    transform:translateY(10px)
+  }
+  to{
+    opacity:1;
+    transform:none
+  }
+}
+
+.num{
+  color:#d9ad78;
+  font-size:13px;
+  margin-bottom:22px;
+}
+
+h1,h2{
+  font-weight:500;
+  line-height:1.7;
+  margin:0 0 22px;
+}
+
+.text{
+  font-size:18px;
+  line-height:2.15;
+  white-space:pre-line;
+  color:#eee5df;
+}
+
+.buttons{
+  display:flex;
+  gap:10px;
+  justify-content:center;
+  flex-wrap:wrap;
+  margin-top:auto;
+  padding-top:28px;
+}
+
+button{
+  border:0;
+  border-radius:999px;
+  padding:13px 26px;
+  font:inherit;
+  cursor:pointer;
+}
+
+.next,
+.send{
+  background:#d9ad78;
+  color:#201711;
+}
+
+.back{
+  background:#ffffff12;
+  color:#eee;
+}
+
+button:hover{
+  transform:translateY(-2px);
+}
+
+textarea{
+  width:100%;
+  min-height:150px;
+  margin-top:18px;
+  padding:16px;
+  border-radius:15px;
+  border:1px solid #ffffff18;
+  background:#ffffff08;
+  color:white;
+  font:inherit;
+  resize:vertical;
+  outline:none;
+}
+
+.thanks{
+  display:none;
+  text-align:center;
+  margin-top:25px;
+  line-height:2;
+  color:#ead2b9;
+}
+
+@media(max-width:600px){
+
+  .card{
+    padding:25px 20px;
+    min-height:650px;
+  }
+
+  .text{
+    font-size:16px;
+    line-height:2.05;
+  }
+
+  h1{
+    font-size:28px;
+  }
+
+  h2{
+    font-size:24px;
+  }
+
+}
+</style>
+</head>
+
+<body>
+
+<main class="story">
+<div class="card">
+
+<div class="progress">
+<div class="bar" id="bar"></div>
+</div>
+
+
+<!-- الصفحة الأولى -->
+
+<section class="page active" id="page1">
+
+<div class="num">01 / 05</div>
+
+<h1>إذًا...</h1>
+
+<div class="text">
+
+اخترتِ أن تكملي.
+
+ربما كنتِ تتوقعين أن يظهر الاسم الآن.
+أن تعرفي ببساطة من أرسل القهوة، ولماذا فعل ذلك، وكيف عرف أنكِ ستتساءلين عنها أصلًا.
+
+لكن بعض الحكايات لا تكشف أصحابها بهذه السرعة.
+
+لأن الغريب في هذه الحكاية...
+أن صاحبها لم يكن يريد أن يترك لكِ اسمًا.
+
+كان يريد أن يترك لكِ شعورًا.
+
+شعورًا يشبه ذلك الذي يأتيكِ عندما يحدث شيء مألوف جدًا...
+لكنكِ لا تستطيعين تذكّر أين شعرتِ به من قبل.
+
+وربما لهذا السبب تحديدًا...
+بقيت القهوة في بالك أكثر مما كان يفترض لها.
+
+ليس لأنها قهوة.
+
+وإنما لأن هناك شخصًا، في مكان ما،
+ما زال يتذكر أشياءً عنكِ...
+أشياء ربما نسيتها أنتِ.
+
+</div>
+
+<div class="buttons">
+<button class="next" onclick="nextPage()">
+كمّلي الحكاية
+</button>
+</div>
+
+</section>
+
+
+<!-- الصفحة الثانية -->
+
+<section class="page" id="page2">
+
+<div class="num">02 / 05</div>
+
+<h2>العيون</h2>
+
+<div class="text">
+
+وهناك شيء آخر...
+شيء ربما لم تنتبهي له يومًا.
+
+عيناكِ.
+
+ليستا من الأشياء التي يمكن وصفها بكلمة واحدة.
+
+لأنهما كانتا تقولان أشياء كثيرة،
+حتى عندما كنتِ تحاولين ألا تقولي شيئًا.
+
+كان هناك فرق بين نظرة وأخرى.
+
+نظرة عندما تكونين مرتاحة...
+ونظرة عندما تحاولين إخفاء أنكِ متعبة.
+
+وأحيانًا...
+كان التعب يظهر في عينيكِ قبل أن يظهر في صوتكِ.
+
+كنتِ تستطيعين أن تقولي:
+«أنا بخير.»
+
+لكن عينيكِ كانتا تقولان شيئًا آخر.
+
+شيء لا يحتاج إلى شرح.
+
+وربما أكثر شيء غريب في الأمر...
+أن الشخص المجهول لم يكن يتذكر ابتسامتكِ فقط.
+
+كان يتذكر تلك اللحظات التي لم تكوني فيها مبتسمة أصلًا.
+
+اللحظات التي كنتِ تظنين أن لا أحد انتبه لها.
+
+وهنا بدأت الحكاية تصبح أقل غرابة...
+
+لأن الشخص الذي أرسل القهوة
+لم يكن يعرفكِ من يوم أمس.
+
+</div>
+
+<div class="buttons">
+
+<button class="back" onclick="prevPage()">
+رجوع
+</button>
+
+<button class="next" onclick="nextPage()">
+التالي
+</button>
+
+</div>
+
+</section>
+
+
+<!-- الصفحة الثالثة -->
+
+<section class="page" id="page3">
+
+<div class="num">03 / 05</div>
+
+<h2>الواقع يبدأ يدخل في الحكاية</h2>
+
+<div class="text">
+
+ربما تتساءلين الآن:
+
+«طيب... مين هو؟»
+
+وربما بدأتِ تفكرين في أكثر من اسم.
+
+شخص قديم؟
+شخص تعرفينه الآن؟
+أم شخص لم يخطر في بالك أصلًا؟
+
+الحقيقة أن المجهول كان أقرب مما تتوقعين...
+
+ليس بالضرورة في المكان.
+وإنما في الذاكرة.
+
+شخص عرف تفاصيل صغيرة عن أيامك.
+
+عرف كيف يمكن لمكالمة قصيرة أن تغيّر مزاج يوم كامل.
+
+عرف أن بعض الأحاديث التي تبدو عادية جدًا...
+تبقى في الذاكرة لسنوات.
+
+عرف أنكِ أحيانًا كنتِ تتحدثين كثيرًا،
+وأحيانًا أخرى كان يكفي أن تكون هناك جهة تسمعكِ.
+
+عرف ضحكتكِ عندما تأتي فجأة.
+
+وعرف صمتكِ عندما يكون وراءه كلام كثير.
+
+والأغرب...
+أنه لم ينسَ.
+
+مرّت الأيام.
+تغيّرت أشياء كثيرة.
+ابتعدت طرق.
+وسكتت محادثات كانت يومًا جزءًا من الحياة اليومية.
+
+ومع ذلك...
+بقيت بعض التفاصيل في مكانها.
+
+كأن الزمن أخذ كل شيء...
+إلا الأشياء التي لم يكن من السهل نسيانها.
+
+</div>
+
+<div class="buttons">
+
+<button class="back" onclick="prevPage()">
+رجوع
+</button>
+
+<button class="next" onclick="nextPage()">
+التالي
+</button>
+
+</div>
+
+</section>
+
+
+<!-- الصفحة الرابعة -->
+
+<section class="page" id="page4">
+
+<div class="num">04 / 05</div>
+
+<h2>يبدأ الشك</h2>
+
+<div class="text">
+
+وهنا ربما بدأتِ تفهمين شيئًا.
+
+القهوة لم تكن هي الرسالة.
+
+القهوة كانت مجرد دليل.
+
+دليل على أن هناك شخصًا ما
+يعرفكِ أكثر مما توقعتِ.
+
+شخص يعرف أن الأشياء الكبيرة ليست دائمًا هي التي تُذكر.
+
+أحيانًا...
+الذي يبقى هو شيء صغير جدًا.
+
+كلمة قيلت بالصدفة.
+موقف لم يكن مهمًا وقتها.
+ضحكة في منتصف حديث طويل.
+نظرة لم ينتبه لها أحد.
+
+أو حتى سؤال بسيط قيل في وقت متأخر من الليل.
+
+أشياء صغيرة...
+
+لكنها عندما تجتمع،
+تستطيع أن تخبركِ بمن يقف خلف الحكاية.
+
+ولهذا...
+
+لا تحاولي البحث عن الاسم فقط.
+
+فكري في الشخص الذي كان يعرفكِ
+عندما لم تكوني تحاولين أن تكوني أي شيء.
+
+الشخص الذي رأى الأيام العادية.
+الأيام الطويلة.
+الضحكات.
+الصمت.
+
+وحتى تلك النظرة التي كانت تظهر في عينيكِ
+عندما تقولين إن كل شيء على ما يرام...
+
+بينما لم يكن كل شيء على ما يرام.
+
+ربما الآن...
+
+بدأ اسم واحد فقط يخطر في بالك.
+
+</div>
+
+<div class="buttons">
+
+<button class="back" onclick="prevPage()">
+رجوع
+</button>
+
+<button class="next" onclick="nextPage()">
+التالي
+</button>
+
+</div>
+
+</section>
+
+
+<!-- الصفحة الخامسة -->
+
+<section class="page" id="page5">
+
+<div class="num">05 / 05</div>
+
+<h2>السؤال الذي يفتح الباب</h2>
+
+<div class="text">
+
+وربما الآن...
+
+لو أنكِ عرفتِ فعلًا من يقف خلف كل هذا...
+
+بعد كل هذا الغياب، وبعد كل الأشياء التي لم تُقل،
+
+ماذا سيكون أول شيء ستقولينه له؟
+
+ليس ما يجب أن تقوليه.
+وليس ما تتوقعين أنه يريد سماعه.
+
+فقط...
+
+ما الشيء الذي سيخرج منكِ دون تفكير؟
+
+اكتبيه هنا.
+
+حتى لو كان كلمة واحدة.
+حتى لو كان سؤالًا.
+حتى لو كان:
+
+«ليش؟»
+
+أو...
+
+«اشتقت لك.»
+
+أو حتى شيء مختلف تمامًا.
+
+لو كان الشخص المجهول أمامكِ الآن...
+ماذا ستقولين له؟
+
+</div>
+
+
+<textarea
+id="answer"
+placeholder="اكتبي هنا..."
+></textarea>
+
+
+<div class="buttons" id="answerButtons">
+
+<button class="back" onclick="prevPage()">
+رجوع
+</button>
+
+<button class="send" onclick="sendAnswer()">
+إرسال
+</button>
+
+</div>
+
+
+<div class="thanks" id="thanks">
+
+وصلت إجابتك 🤍
+
+<br>
+
+وبعدها...
+
+<br>
+
+ربما يكون دور المجهول أن يجيب.
+
+</div>
+
+</section>
+
+</div>
+</main>
+
+
+<script>
+
+let current = 1;
+const total = 5;
+
+
+function showPage(n){
+
+document
+.querySelectorAll(".page")
+.forEach(page => page.classList.remove("active"));
+
+document
+.getElementById("page" + n)
+.classList.add("active");
+
+current = n;
+
+document
+.getElementById("bar")
+.style.width = (n / total * 100) + "%";
+
+window.scrollTo({
+top:0,
+behavior:"smooth"
+});
+
+}
+
+
+function nextPage(){
+
+if(current < total){
+showPage(current + 1);
+}
+
+}
+
+
+function prevPage(){
+
+if(current > 1){
+showPage(current - 1);
+}
+
+}
+
+
+async function sendAnswer(){
+
+const answer =
+document.getElementById("answer").value.trim();
+
+
+if(!answer){
+
+alert("اكتبي إجابتك أولًا 🤍");
+
+return;
+
+}
+
+
+try{
+
+const response = await fetch(
+
+"https://formspree.io/f/xbgljlrp",
+
+{
+
+method:"POST",
+
+headers:{
+"Content-Type":"application/json",
+"Accept":"application/json"
+},
+
+body:JSON.stringify({
+
+answer:answer,
+
+_subject:"إجابة حكاية القهوة",
+
+_date:new Date().toLocaleString("ar-SA")
+
+})
+
+}
+
+);
+
+
+if(response.ok){
+
+document
+.getElementById("answer")
+.style.display="none";
+
+document
+.getElementById("answerButtons")
+.style.display="none";
+
+document
+.getElementById("thanks")
+.style.display="block";
+
+}
+
+else{
+
+alert(
+"صار خطأ بسيط، جربي الإرسال مرة ثانية."
+);
+
+}
+
+
+}
+
+catch(error){
+
+alert(
+"تأكدي من اتصال الإنترنت وجربي الإرسال مرة ثانية."
+);
+
+}
+
+}
+
+</script>
+
+</body>
+</html>
