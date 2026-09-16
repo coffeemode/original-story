@@ -8,365 +8,497 @@
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Cairo:wght@400;500;600&display=swap');
 
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
 }
 
-html, body {
-    width: 100%;
-    min-height: 100%;
+html{
+    scroll-behavior:smooth;
 }
 
-body {
+body{
+    min-height:100vh;
     background:
-        radial-gradient(circle at 50% 20%, rgba(180, 145, 65, 0.08), transparent 32%),
-        linear-gradient(135deg, #020817 0%, #061326 45%, #020713 100%);
-    color: #f4f0e7;
-    font-family: "Cairo", sans-serif;
-    overflow-x: hidden;
+        radial-gradient(circle at 50% 10%,rgba(211,174,82,.08),transparent 30%),
+        radial-gradient(circle at 10% 90%,rgba(30,61,103,.18),transparent 35%),
+        linear-gradient(135deg,#020817,#061528 48%,#010611);
+    color:#f4f0e7;
+    font-family:"Cairo",sans-serif;
+    overflow-x:hidden;
 }
 
-/* لمعة خفيفة بالخلفية */
-body::before {
-    content: "";
-    position: fixed;
-    inset: 0;
-    pointer-events: none;
+/* طبقة غموض */
+body:before{
+    content:"";
+    position:fixed;
+    inset:0;
+    pointer-events:none;
     background:
-        radial-gradient(circle at 15% 80%, rgba(212, 174, 76, 0.035), transparent 25%),
-        radial-gradient(circle at 85% 15%, rgba(212, 174, 76, 0.035), transparent 25%);
-    z-index: -1;
+        linear-gradient(90deg,transparent 49.8%,rgba(218,183,91,.025) 50%,transparent 50.2%);
+    z-index:-1;
 }
 
-/* حاوية الموقع */
-.app {
-    width: 100%;
-    max-width: 850px;
-    margin: auto;
-    padding: 25px 18px 45px;
+.app{
+    width:100%;
+    max-width:820px;
+    margin:auto;
+    padding:22px 16px 120px;
 }
 
-/* شريط التقدم */
-.progress-wrap {
-    width: 100%;
-    height: 3px;
-    background: rgba(255,255,255,0.08);
-    border-radius: 10px;
-    overflow: hidden;
-    margin-bottom: 28px;
+/* التقدم */
+.progress-wrap{
+    height:2px;
+    width:100%;
+    background:rgba(255,255,255,.08);
+    margin-bottom:18px;
 }
 
-.progress {
-    width: 20%;
-    height: 100%;
-    background: linear-gradient(90deg, #9d7831, #e4c46a, #9d7831);
-    transition: width 0.6s ease;
+.progress{
+    height:100%;
+    width:20%;
+    background:linear-gradient(90deg,#8f6b2d,#e5c66f,#8f6b2d);
+    transition:width .7s ease;
 }
 
 /* رقم الصفحة */
-.page-number {
-    text-align: center;
-    color: rgba(228,196,106,0.65);
-    font-size: 12px;
-    letter-spacing: 2px;
-    margin-bottom: 18px;
+.page-number{
+    text-align:center;
+    color:rgba(227,195,107,.55);
+    font-size:10px;
+    letter-spacing:4px;
+    margin-bottom:14px;
 }
 
-/* بطاقة القصة */
-.story-card {
-    position: relative;
-    min-height: 72vh;
-    padding: 42px 34px 35px;
-    border: 1px solid rgba(218, 183, 91, 0.18);
+/* البطاقة */
+.story-card{
+    position:relative;
     background:
-        linear-gradient(
-            145deg,
-            rgba(10, 27, 50, 0.92),
-            rgba(2, 10, 24, 0.96)
-        );
+        linear-gradient(145deg,
+            rgba(8,25,47,.94),
+            rgba(1,9,21,.98));
+    border:1px solid rgba(218,183,91,.2);
+    border-radius:4px;
+    padding:38px 34px 28px;
+    min-height:70vh;
     box-shadow:
-        0 25px 70px rgba(0,0,0,0.45),
-        inset 0 0 70px rgba(212,174,76,0.025);
-    border-radius: 3px;
+        0 30px 90px rgba(0,0,0,.5),
+        inset 0 0 80px rgba(218,183,91,.025);
 }
 
-/* الزخرفة */
-.story-card::before,
-.story-card::after {
-    content: "";
-    position: absolute;
-    width: 42px;
-    height: 42px;
-    border-color: rgba(218,183,91,0.4);
-    pointer-events: none;
+/* زوايا فخمة */
+.story-card:before,
+.story-card:after{
+    content:"";
+    position:absolute;
+    width:46px;
+    height:46px;
+    pointer-events:none;
 }
 
-.story-card::before {
-    top: 14px;
-    right: 14px;
-    border-top: 1px solid;
-    border-right: 1px solid;
+.story-card:before{
+    top:13px;
+    right:13px;
+    border-top:1px solid rgba(218,183,91,.5);
+    border-right:1px solid rgba(218,183,91,.5);
 }
 
-.story-card::after {
-    bottom: 14px;
-    left: 14px;
-    border-bottom: 1px solid;
-    border-left: 1px solid;
+.story-card:after{
+    bottom:13px;
+    left:13px;
+    border-bottom:1px solid rgba(218,183,91,.5);
+    border-left:1px solid rgba(218,183,91,.5);
 }
 
 /* الصفحات */
-.page {
-    display: none;
-    animation: pageIn 0.7s ease forwards;
+.page{
+    display:none;
+    animation:appear .7s ease;
 }
 
-.page.active {
-    display: block;
+.page.active{
+    display:block;
 }
 
-@keyframes pageIn {
-    from {
-        opacity: 0;
-        transform: translateY(12px);
+@keyframes appear{
+    from{
+        opacity:0;
+        transform:translateY(15px);
     }
-    to {
-        opacity: 1;
-        transform: translateY(0);
+    to{
+        opacity:1;
+        transform:translateY(0);
     }
 }
 
 /* العنوان */
-h1 {
-    font-family: "Amiri", serif;
-    color: #e3c36b;
-    text-align: center;
-    font-size: clamp(30px, 6vw, 44px);
-    font-weight: 400;
-    margin-bottom: 35px;
-    text-shadow: 0 0 25px rgba(228,196,106,0.12);
+h1{
+    font-family:"Amiri",serif;
+    font-size:clamp(31px,7vw,46px);
+    font-weight:400;
+    color:#e4c46c;
+    text-align:center;
+    margin-bottom:14px;
+    text-shadow:0 0 30px rgba(228,196,108,.12);
 }
 
-.title-line {
-    width: 55px;
-    height: 1px;
-    background: #b89445;
-    margin: -20px auto 32px;
-    opacity: 0.65;
+.title-line{
+    width:50px;
+    height:1px;
+    margin:0 auto 30px;
+    background:linear-gradient(90deg,transparent,#d4af5a,transparent);
 }
 
 /* النص */
-.story-text {
-    font-family: "Amiri", serif;
-    font-size: 20px;
-    line-height: 2.15;
-    color: #f1eee7;
-    white-space: pre-line;
+.story-text{
+    font-family:"Amiri",serif;
+    font-size:20px;
+    line-height:2.12;
+    color:#f2efe8;
 }
 
-.story-text p {
-    margin-bottom: 20px;
+.story-text p{
+    margin-bottom:20px;
 }
 
-/* الكلمات المهمة */
-.gold {
-    color: #e3c36b;
-    text-shadow: 0 0 18px rgba(227,195,107,0.08);
+.gold{
+    color:#e4c46c;
+    text-shadow:0 0 18px rgba(228,196,108,.12);
 }
 
-.white {
-    color: #ffffff;
+/* التنقل */
+.navigation{
+    display:flex;
+    justify-content:center;
+    gap:12px;
+    margin-top:30px;
 }
 
-/* أزرار التنقل */
-.navigation {
-    display: flex;
-    justify-content: center;
-    gap: 12px;
-    margin-top: 30px;
+.nav-btn{
+    min-width:120px;
+    padding:11px 22px;
+    border:1px solid rgba(218,183,91,.38);
+    background:rgba(3,13,28,.8);
+    color:#e4c46c;
+    font-family:"Cairo",sans-serif;
+    font-size:13px;
+    cursor:pointer;
+    border-radius:2px;
+    transition:.3s ease;
 }
 
-button {
-    font-family: "Cairo", sans-serif;
-    cursor: pointer;
-    border: 1px solid rgba(218,183,91,0.38);
-    background: rgba(8,22,41,0.75);
-    color: #e3c36b;
-    padding: 11px 25px;
-    border-radius: 2px;
-    font-size: 14px;
-    transition: all 0.3s ease;
+.nav-btn:hover{
+    background:rgba(218,183,91,.08);
+    border-color:rgba(218,183,91,.75);
+    box-shadow:0 0 25px rgba(218,183,91,.08);
 }
 
-button:hover {
-    background: rgba(218,183,91,0.1);
-    border-color: rgba(218,183,91,0.75);
-    box-shadow: 0 0 22px rgba(218,183,91,0.08);
+.nav-btn:disabled{
+    opacity:.22;
+    cursor:default;
 }
 
-button:active {
-    transform: scale(0.97);
+/* منطقة السؤال */
+.question-box{
+    position:relative;
+    margin-top:28px;
+    padding:22px 20px 18px;
+    background:
+        linear-gradient(145deg,
+        rgba(15,34,58,.72),
+        rgba(2,12,25,.88));
+    border:1px solid rgba(218,183,91,.3);
+    box-shadow:
+        inset 0 0 35px rgba(218,183,91,.025),
+        0 15px 40px rgba(0,0,0,.22);
 }
 
-button:disabled {
-    opacity: 0.25;
-    cursor: default;
+.question-box:before{
+    content:"";
+    position:absolute;
+    top:-1px;
+    right:22px;
+    width:55px;
+    height:1px;
+    background:#e4c46c;
 }
 
-/* صندوق الإجابة */
-.answer-box {
-    margin-top: 25px;
+.question-label{
+    text-align:center;
+    color:#e4c46c;
+    font-family:"Amiri",serif;
+    font-size:19px;
+    margin-bottom:13px;
 }
 
-textarea {
-    width: 100%;
-    min-height: 125px;
-    resize: vertical;
-    padding: 16px;
-    border: 1px solid rgba(218,183,91,0.25);
-    border-radius: 2px;
-    background: rgba(0,8,20,0.65);
-    color: #fff;
-    font-family: "Amiri", serif;
-    font-size: 19px;
-    outline: none;
-    direction: rtl;
-    transition: 0.3s;
+.question-sub{
+    text-align:center;
+    color:rgba(255,255,255,.48);
+    font-size:10px;
+    margin-bottom:14px;
 }
 
-textarea::placeholder {
-    color: rgba(255,255,255,0.35);
+textarea{
+    display:block;
+    width:100%;
+    height:82px;
+    min-height:82px;
+    max-height:160px;
+    resize:vertical;
+
+    border:1px solid rgba(218,183,91,.2);
+    border-radius:2px;
+
+    background:rgba(0,7,17,.7);
+    color:#fff;
+
+    padding:13px 15px;
+    font-family:"Amiri",serif;
+    font-size:18px;
+    line-height:1.8;
+
+    outline:none;
+    transition:.3s ease;
 }
 
-textarea:focus {
-    border-color: rgba(218,183,91,0.65);
-    box-shadow: 0 0 20px rgba(218,183,91,0.06);
+textarea::placeholder{
+    color:rgba(255,255,255,.28);
 }
 
-.send-btn {
-    display: block;
-    margin: 16px auto 0;
-    min-width: 130px;
+textarea:focus{
+    border-color:rgba(228,196,108,.65);
+    box-shadow:0 0 22px rgba(228,196,108,.06);
 }
 
-/* مشغل الأغنية */
-.music-player {
-    position: fixed;
-    left: 16px;
-    bottom: 16px;
-    z-index: 1000;
+.send-btn{
+    display:block;
+    margin:14px auto 0;
+    padding:9px 28px;
 
-    display: flex;
-    align-items: center;
-    gap: 10px;
+    border:1px solid rgba(218,183,91,.45);
+    background:linear-gradient(
+        135deg,
+        rgba(218,183,91,.12),
+        rgba(218,183,91,.035)
+    );
 
-    padding: 9px 12px;
-    background: rgba(2, 10, 23, 0.88);
-    border: 1px solid rgba(218,183,91,0.28);
-    border-radius: 3px;
-
-    backdrop-filter: blur(12px);
-    box-shadow: 0 10px 30px rgba(0,0,0,0.35);
+    color:#e4c46c;
+    font-family:"Cairo",sans-serif;
+    font-size:12px;
+    cursor:pointer;
+    border-radius:2px;
+    transition:.3s;
 }
 
-.music-icon {
-    color: #e3c36b;
-    font-size: 17px;
+.send-btn:hover{
+    background:rgba(218,183,91,.14);
+    box-shadow:0 0 22px rgba(218,183,91,.08);
 }
 
-.music-info {
-    display: flex;
-    flex-direction: column;
-    line-height: 1.25;
+/* =========================
+   مشغل الموسيقى
+========================= */
+
+.music-player{
+    position:fixed;
+    left:16px;
+    bottom:16px;
+    z-index:1000;
+
+    display:flex;
+    align-items:center;
+    gap:10px;
+
+    padding:10px 12px;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(3,14,29,.96),
+            rgba(7,22,40,.94)
+        );
+
+    border:1px solid rgba(218,183,91,.3);
+    border-radius:3px;
+
+    box-shadow:
+        0 15px 40px rgba(0,0,0,.4),
+        inset 0 0 25px rgba(218,183,91,.025);
+
+    backdrop-filter:blur(12px);
 }
 
-.music-status {
-    color: rgba(255,255,255,0.55);
-    font-size: 9px;
+.music-button{
+    width:30px;
+    height:30px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    border:1px solid rgba(228,196,108,.4);
+    background:rgba(228,196,108,.06);
+
+    color:#e4c46c;
+    font-size:12px;
+
+    cursor:pointer;
+    border-radius:50%;
 }
 
-.music-name {
-    color: #e3c36b;
-    font-size: 11px;
+.music-details{
+    min-width:125px;
+    display:flex;
+    flex-direction:column;
+    line-height:1.35;
 }
 
-.volume {
-    width: 65px;
-    accent-color: #d8b65d;
-    cursor: pointer;
+.music-status{
+    color:rgba(255,255,255,.42);
+    font-size:8px;
+    letter-spacing:1px;
 }
 
-/* تنبيه الموسيقى */
-.music-hint {
-    position: fixed;
-    left: 16px;
-    bottom: 72px;
-    z-index: 999;
-
-    color: rgba(255,255,255,0.75);
-    font-size: 11px;
-
-    background: rgba(2,10,23,0.88);
-    border: 1px solid rgba(218,183,91,0.18);
-    padding: 8px 11px;
-    border-radius: 2px;
-
-    opacity: 0;
-    transform: translateY(8px);
-    pointer-events: none;
-    transition: 0.5s ease;
+.music-name{
+    color:#e4c46c;
+    font-size:11px;
 }
 
-.music-hint.show {
-    opacity: 1;
-    transform: translateY(0);
+.volume-wrap{
+    display:flex;
+    align-items:center;
+    gap:5px;
 }
 
-/* للجوال */
-@media (max-width: 600px) {
+.volume-icon{
+    color:rgba(228,196,108,.75);
+    font-size:11px;
+}
 
-    .app {
-        padding: 18px 12px 35px;
+.volume{
+    width:58px;
+    height:3px;
+    accent-color:#d8b65d;
+    cursor:pointer;
+}
+
+/* موجة صغيرة */
+.music-bars{
+    display:flex;
+    align-items:flex-end;
+    gap:2px;
+    height:15px;
+    margin-right:3px;
+}
+
+.music-bars span{
+    width:2px;
+    height:5px;
+    background:#d9b85e;
+    opacity:.75;
+}
+
+.music-bars.playing span:nth-child(1){
+    animation:bar .7s infinite alternate;
+}
+
+.music-bars.playing span:nth-child(2){
+    animation:bar .5s .1s infinite alternate;
+}
+
+.music-bars.playing span:nth-child(3){
+    animation:bar .8s .2s infinite alternate;
+}
+
+.music-bars.playing span:nth-child(4){
+    animation:bar .6s .05s infinite alternate;
+}
+
+@keyframes bar{
+    from{height:4px}
+    to{height:14px}
+}
+
+/* رسالة الموسيقى */
+.music-hint{
+    position:fixed;
+    left:16px;
+    bottom:82px;
+    z-index:999;
+
+    padding:8px 12px;
+
+    background:rgba(2,10,23,.94);
+    border:1px solid rgba(218,183,91,.22);
+
+    color:rgba(255,255,255,.72);
+    font-size:10px;
+
+    opacity:0;
+    transform:translateY(8px);
+    transition:.4s ease;
+    pointer-events:none;
+}
+
+.music-hint.show{
+    opacity:1;
+    transform:translateY(0);
+}
+
+/* الجوال */
+@media(max-width:600px){
+
+    .app{
+        padding:15px 11px 105px;
     }
 
-    .story-card {
-        padding: 34px 21px 30px;
-        min-height: 76vh;
+    .story-card{
+        padding:32px 20px 27px;
+        min-height:76vh;
     }
 
-    .story-text {
-        font-size: 18px;
-        line-height: 2.05;
+    .story-text{
+        font-size:18px;
+        line-height:2.04;
     }
 
-    h1 {
-        font-size: 31px;
-        margin-bottom: 28px;
+    h1{
+        font-size:32px;
     }
 
-    .title-line {
-        margin-bottom: 27px;
+    .title-line{
+        margin-bottom:25px;
     }
 
-    .music-player {
-        left: 10px;
-        bottom: 10px;
-        padding: 8px 9px;
+    .question-box{
+        padding:19px 15px 16px;
     }
 
-    .volume {
-        width: 50px;
+    textarea{
+        height:78px;
+        min-height:78px;
+        font-size:17px;
     }
 
-    .music-hint {
-        left: 10px;
-        bottom: 62px;
+    .music-player{
+        left:9px;
+        bottom:9px;
+        padding:8px 9px;
+        gap:7px;
     }
 
-    button {
-        padding: 10px 20px;
+    .music-details{
+        min-width:105px;
+    }
+
+    .volume{
+        width:45px;
+    }
+
+    .music-hint{
+        left:9px;
+        bottom:67px;
     }
 }
 </style>
@@ -393,7 +525,6 @@ textarea:focus {
             <div class="title-line"></div>
 
             <div class="story-text">
-
                 <p>
 إذًا...
 اخترتِ أن تكملي.
@@ -423,8 +554,8 @@ textarea:focus {
 وربما...
 <span class="gold">كانت تلك اللحظة مجرد بداية.</span>
                 </p>
-
             </div>
+
         </section>
 
 
@@ -435,7 +566,6 @@ textarea:focus {
             <div class="title-line"></div>
 
             <div class="story-text">
-
                 <p>
 في يوم طويل...
 لا نحتاج دائمًا إلى أن نقول:
@@ -474,8 +604,8 @@ textarea:focus {
 فقط...
 <span class="gold">لا تتوقفي عن السير.</span>
                 </p>
-
             </div>
+
         </section>
 
 
@@ -486,7 +616,6 @@ textarea:focus {
             <div class="title-line"></div>
 
             <div class="story-text">
-
                 <p>
 في المساء...
 تتغير الأشياء قليلًا.
@@ -520,8 +649,8 @@ textarea:focus {
 هذه حكاية.
 <span class="gold">والحكايات الجميلة لا تعطيكِ كل شيء دفعة واحدة.</span>
                 </p>
-
             </div>
+
         </section>
 
 
@@ -532,7 +661,6 @@ textarea:focus {
             <div class="title-line"></div>
 
             <div class="story-text">
-
                 <p>
 ثم يأتي ذلك الشعور...
 عندما يبدأ الفضول يصبح جزءًا من يومكِ.
@@ -568,8 +696,8 @@ textarea:focus {
 توقفي عندها قليلًا.
 <span class="gold">ربما تكون الحكاية قد مرت من هناك.</span>
                 </p>
-
             </div>
+
         </section>
 
 
@@ -612,25 +740,44 @@ textarea:focus {
 لأن بعض الأمنيات، عندما نحاول ترتيبها بالكلمات، تفقد شيئًا من صدقها.
                 </p>
 
-                <form
-                    action="https://formspree.io/f/xbgljlrp"
-                    method="POST"
-                    class="answer-box"
-                >
+                <!-- خانة مميزة -->
+                <div class="question-box">
 
-                    <textarea
-                        name="message"
-                        placeholder="[ اكتبي هنا... ]"
-                        required
-                    ></textarea>
+                    <div class="question-label">
+                        اكتبي هنا...
+                    </div>
 
-                    <input type="hidden" name="_subject" value="إجابة القصة">
+                    <div class="question-sub">
+                        أول شيء جاء في بالكِ
+                    </div>
 
-                    <button type="submit" class="send-btn">
-                        إرسال
-                    </button>
+                    <form
+                        action="https://formspree.io/f/xbgljlrp"
+                        method="POST"
+                    >
 
-                </form>
+                        <textarea
+                            name="message"
+                            placeholder="[ اكتبي هنا... ]"
+                            required
+                        ></textarea>
+
+                        <input
+                            type="hidden"
+                            name="_subject"
+                            value="إجابة القصة"
+                        >
+
+                        <button
+                            type="submit"
+                            class="send-btn"
+                        >
+                            إرسال
+                        </button>
+
+                    </form>
+
+                </div>
 
                 <p style="margin-top:25px;">
 وبعدها...
@@ -651,11 +798,20 @@ textarea:focus {
         <!-- أزرار التنقل -->
         <div class="navigation">
 
-            <button id="prevBtn" onclick="previousPage()" disabled>
+            <button
+                class="nav-btn"
+                id="prevBtn"
+                onclick="previousPage()"
+                disabled
+            >
                 السابق
             </button>
 
-            <button id="nextBtn" onclick="nextPage()">
+            <button
+                class="nav-btn"
+                id="nextBtn"
+                onclick="nextPage()"
+            >
                 أكمل الحكاية
             </button>
 
@@ -665,45 +821,83 @@ textarea:focus {
 </div>
 
 
-<!-- الأغنية -->
-<audio id="music" loop preload="auto">
-    <source src="Cinnamon Girl.mp3" type="audio/mpeg">
+<!-- =========================
+     الأغنية
+========================= -->
+
+<audio
+    id="music"
+    loop
+    preload="auto"
+>
+    <source src="music.mp3" type="audio/mpeg">
 </audio>
 
 
-<!-- مؤشر الموسيقى -->
+<!-- مشغل الموسيقى -->
 <div class="music-player">
 
-    <div class="music-icon" id="musicIcon">
-        ♪
-    </div>
+    <button
+        class="music-button"
+        id="musicButton"
+        onclick="toggleMusic()"
+        aria-label="تشغيل أو إيقاف الموسيقى"
+    >
+        ▶
+    </button>
 
-    <div class="music-info">
-        <span class="music-status" id="musicStatus">
-            الموسيقى متوقفة
+    <div class="music-details">
+
+        <span
+            class="music-status"
+            id="musicStatus"
+        >
+            MUSIC • READY
         </span>
 
         <span class="music-name">
             Cinnamon Girl
         </span>
+
     </div>
 
-    <input
-        class="volume"
-        id="volume"
-        type="range"
-        min="0"
-        max="1"
-        step="0.01"
-        value="0.25"
-        aria-label="مستوى الصوت"
+    <div
+        class="music-bars"
+        id="musicBars"
     >
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+
+    <div class="volume-wrap">
+
+        <span class="volume-icon">
+            ♪
+        </span>
+
+        <input
+            class="volume"
+            id="volume"
+            type="range"
+            min="0"
+            max="1"
+            step="0.01"
+            value="0.25"
+            aria-label="مستوى الصوت"
+        >
+
+    </div>
 
 </div>
 
 
-<div class="music-hint" id="musicHint">
-    ♪ توجد موسيقى بالخلفية — يمكنك التحكم بالصوت
+<div
+    class="music-hint"
+    id="musicHint"
+>
+    ♪ الموسيقى تعمل بالخلفية — يمكنك التحكم بالصوت
 </div>
 
 
@@ -712,134 +906,147 @@ textarea:focus {
 let currentPage = 0;
 
 const pages = document.querySelectorAll(".page");
-const progress = document.getElementById("progress");
-const pageNumber = document.getElementById("pageNumber");
 
-const prevBtn = document.getElementById("prevBtn");
-const nextBtn = document.getElementById("nextBtn");
+const progress =
+    document.getElementById("progress");
 
-const music = document.getElementById("music");
-const volume = document.getElementById("volume");
+const pageNumber =
+    document.getElementById("pageNumber");
 
-const musicStatus = document.getElementById("musicStatus");
-const musicIcon = document.getElementById("musicIcon");
-const musicHint = document.getElementById("musicHint");
+const prevBtn =
+    document.getElementById("prevBtn");
+
+const nextBtn =
+    document.getElementById("nextBtn");
+
+const music =
+    document.getElementById("music");
+
+const musicButton =
+    document.getElementById("musicButton");
+
+const musicStatus =
+    document.getElementById("musicStatus");
+
+const musicBars =
+    document.getElementById("musicBars");
+
+const musicHint =
+    document.getElementById("musicHint");
+
+const volume =
+    document.getElementById("volume");
 
 
-/* مستوى الصوت الافتراضي */
+/* مستوى الصوت */
 music.volume = 0.25;
 
 
-/* تشغيل الموسيقى */
-function startMusic() {
+/* محاولة تشغيل الموسيقى */
+function startMusic(){
 
     music.play()
-        .then(() => {
+    .then(() => {
 
-            musicStatus.textContent = "الموسيقى تعمل";
-            musicIcon.textContent = "♫";
+        musicButton.textContent = "Ⅱ";
+        musicStatus.textContent = "MUSIC • PLAYING";
 
-            showMusicHint();
+        musicBars.classList.add("playing");
 
-        })
-        .catch(() => {
+        showMusicHint();
 
-            musicStatus.textContent = "اضغطي للمتابعة";
+    })
+    .catch(() => {
 
-        });
+        /*
+        بعض المتصفحات تمنع الصوت التلقائي.
+        سيتم تشغيله عند أول لمسة/ضغطة.
+        */
+
+        musicStatus.textContent =
+            "TAP TO PLAY";
+
+    });
 
 }
 
 
-/* إظهار التنبيه لفترة قصيرة */
-function showMusicHint() {
+/* زر الموسيقى */
+function toggleMusic(){
+
+    if(music.paused){
+
+        startMusic();
+
+    }else{
+
+        music.pause();
+
+        musicButton.textContent = "▶";
+        musicStatus.textContent = "MUSIC • PAUSED";
+
+        musicBars.classList.remove("playing");
+
+    }
+
+}
+
+
+/* إظهار رسالة صغيرة */
+function showMusicHint(){
 
     musicHint.classList.add("show");
 
     setTimeout(() => {
+
         musicHint.classList.remove("show");
-    }, 5000);
+
+    },5000);
 
 }
 
 
-/* تغيير الصوت */
-volume.addEventListener("input", function() {
+/* التحكم بالصوت */
+volume.addEventListener("input",function(){
 
-    music.volume = this.value;
-
-    if (music.volume == 0) {
-        musicStatus.textContent = "الموسيقى مكتومة";
-        musicIcon.textContent = "×";
-    } else if (!music.paused) {
-        musicStatus.textContent = "الموسيقى تعمل";
-        musicIcon.textContent = "♫";
-    }
+    music.volume = Number(this.value);
 
 });
 
 
-/* تحديث الصفحة */
-function updatePage() {
+/*
+تشغيل الموسيقى مع أول تفاعل
+حتى لا يمنعها المتصفح.
+*/
 
-    pages.forEach((page, index) => {
+let musicStarted = false;
 
-        page.classList.toggle(
-            "active",
-            index === currentPage
-        );
+function firstInteraction(){
 
-    });
+    if(!musicStarted){
 
+        musicStarted = true;
 
-    /* التقدم */
-    const percentage =
-        ((currentPage + 1) / pages.length) * 100;
-
-    progress.style.width = percentage + "%";
-
-
-    /* رقم الصفحة */
-    pageNumber.textContent =
-        String(currentPage + 1).padStart(2, "0")
-        + " / "
-        + String(pages.length).padStart(2, "0");
-
-
-    /* زر السابق */
-    prevBtn.disabled = currentPage === 0;
-
-
-    /* زر التالي */
-    if (currentPage === pages.length - 1) {
-
-        nextBtn.style.display = "none";
-
-    } else {
-
-        nextBtn.style.display = "inline-block";
+        startMusic();
 
     }
-
-
-    window.scrollTo({
-        top: 0,
-        behavior: "smooth"
-    });
 
 }
 
 
+document.addEventListener(
+    "pointerdown",
+    firstInteraction,
+    {once:true}
+);
+
+
 /* الصفحة التالية */
-function nextPage() {
+function nextPage(){
 
-    /* أول ضغطة تشغل الأغنية */
-    if (music.paused) {
-        startMusic();
-    }
+    firstInteraction();
 
-
-    if (currentPage < pages.length - 1) {
+    if(currentPage < pages.length - 1){
 
         currentPage++;
 
@@ -851,9 +1058,9 @@ function nextPage() {
 
 
 /* الصفحة السابقة */
-function previousPage() {
+function previousPage(){
 
-    if (currentPage > 0) {
+    if(currentPage > 0){
 
         currentPage--;
 
@@ -864,28 +1071,94 @@ function previousPage() {
 }
 
 
-/* محاولة تشغيل الأغنية بعد أول تفاعل */
-document.addEventListener("click", function() {
+/* تحديث الصفحة */
+function updatePage(){
 
-    if (music.paused && currentPage > 0) {
-        startMusic();
+    pages.forEach((page,index) => {
+
+        page.classList.toggle(
+            "active",
+            index === currentPage
+        );
+
+    });
+
+
+    const percentage =
+        ((currentPage + 1) / pages.length) * 100;
+
+    progress.style.width =
+        percentage + "%";
+
+
+    pageNumber.textContent =
+        String(currentPage + 1).padStart(2,"0")
+        + " / "
+        + String(pages.length).padStart(2,"0");
+
+
+    prevBtn.disabled =
+        currentPage === 0;
+
+
+    if(currentPage === pages.length - 1){
+
+        nextBtn.style.display = "none";
+
+    }else{
+
+        nextBtn.style.display = "inline-block";
+
     }
 
-}, { once: true });
+}
 
 
-/* منع إرسال النموذج إذا كان فارغًا */
-document.querySelector("form").addEventListener("submit", function(e) {
+/* منع الإرسال الفارغ */
+const form =
+    document.querySelector("form");
 
-    const textarea = this.querySelector("textarea");
+form.addEventListener("submit",function(e){
 
-    if (!textarea.value.trim()) {
+    const textarea =
+        this.querySelector("textarea");
+
+    if(!textarea.value.trim()){
 
         e.preventDefault();
 
         textarea.focus();
 
     }
+
+});
+
+
+/*
+محاولة تشغيل صامتة عند فتح الموقع.
+إذا سمح المتصفح، تبدأ الموسيقى.
+إذا لم يسمح، أول لمسة تشغلها.
+*/
+
+music.muted = true;
+
+music.play()
+.then(() => {
+
+    music.muted = false;
+
+    musicButton.textContent = "Ⅱ";
+    musicStatus.textContent = "MUSIC • PLAYING";
+
+    musicBars.classList.add("playing");
+
+})
+.catch(() => {
+
+    music.muted = false;
+
+    musicStatus.textContent =
+        "TAP TO PLAY";
 
 });
 
