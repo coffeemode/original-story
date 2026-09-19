@@ -32,7 +32,6 @@ body{
     overflow-x:hidden;
 }
 
-/* نجوم خفيفة */
 body::before{
     content:"";
     position:fixed;
@@ -48,7 +47,6 @@ body::before{
         radial-gradient(circle at 45% 42%,#fff 0 1px,transparent 1.5px);
 }
 
-/* الحاوية */
 .wrapper{
     width:100%;
     max-width:850px;
@@ -60,7 +58,6 @@ body::before{
     justify-content:center;
 }
 
-/* المحتوى */
 .story{
     width:100%;
     position:relative;
@@ -77,7 +74,6 @@ body::before{
         inset 0 0 40px rgba(201,166,76,.025);
 }
 
-/* زوايا ذهبية */
 .story::before,
 .story::after{
     content:"";
@@ -101,7 +97,6 @@ body::before{
     border-left:1px solid;
 }
 
-/* الصفحات */
 .page{
     display:none;
     animation:fadeIn .7s ease;
@@ -122,7 +117,6 @@ body::before{
     }
 }
 
-/* العنوان */
 .title{
     text-align:center;
     color:#d8b45b;
@@ -143,7 +137,6 @@ body::before{
     opacity:.6;
 }
 
-/* النص */
 .text{
     font-size:20px;
     line-height:2.15;
@@ -160,7 +153,6 @@ body::before{
     color:#fff;
 }
 
-/* شريط التقدم */
 .progress-area{
     margin-bottom:32px;
 }
@@ -189,7 +181,6 @@ body::before{
     box-shadow:0 0 10px rgba(216,180,91,.35);
 }
 
-/* الأزرار */
 .buttons{
     display:flex;
     justify-content:space-between;
@@ -220,7 +211,6 @@ body::before{
     pointer-events:none;
 }
 
-/* الصفحة الأخيرة */
 .question-box{
     margin-top:28px;
 }
@@ -250,7 +240,6 @@ textarea:focus{
     box-shadow:0 0 20px rgba(216,180,91,.08);
 }
 
-/* زر الإرسال المميز */
 .send-wrap{
     display:flex;
     justify-content:center;
@@ -308,7 +297,6 @@ textarea:focus{
     transform:none;
 }
 
-/* رسالة الإرسال */
 .success-message{
     text-align:center;
     color:#e4c46c;
@@ -328,7 +316,6 @@ textarea:focus{
     height:auto;
 }
 
-/* مشغل الموسيقى */
 .music-player{
     position:fixed;
     left:15px;
@@ -354,7 +341,6 @@ textarea:focus{
     border-radius:3px;
 }
 
-/* أيقونة الموسيقى */
 .music-icon{
     width:28px;
     height:28px;
@@ -372,7 +358,6 @@ textarea:focus{
     flex-shrink:0;
 }
 
-/* معلومات الأغنية */
 .music-info{
     display:flex;
     flex-direction:column;
@@ -391,7 +376,6 @@ textarea:focus{
     line-height:1.4;
 }
 
-/* زر التشغيل */
 .music-toggle{
     background:none;
     border:none;
@@ -401,7 +385,6 @@ textarea:focus{
     padding:2px;
 }
 
-/* التحكم بالصوت */
 .volume-control{
     width:65px;
     height:3px;
@@ -409,7 +392,6 @@ textarea:focus{
     cursor:pointer;
 }
 
-/* موبايل */
 @media(max-width:600px){
 
     .wrapper{
@@ -472,6 +454,7 @@ textarea:focus{
     .volume-control{
         width:50px;
     }
+
 }
 
 </style>
@@ -483,7 +466,6 @@ textarea:focus{
 
 <main class="story">
 
-    <!-- شريط التقدم -->
     <div class="progress-area">
 
         <div class="progress-info">
@@ -738,6 +720,7 @@ textarea:focus{
         <h1 class="title">ماذا سيأتي بعد؟</h1>
 
         <div class="text">
+
 والآن...
 أنتِ هنا.
 
@@ -745,14 +728,58 @@ textarea:focus{
 وبعد يومٍ آخر.
 وبعد كل تلك التفاصيل الصغيرة التي ربما لم تكوني ستلاحظينها لو لم تبدأ الحكاية.
 
+<span class="gold">وربما لاحظتِ شيئًا آخر هذه المرة...</span>
+
+شيئًا يبدو بسيطًا في البداية، لكنه ليس كذلك تمامًا.
+
+هذه المرة، لم يكن هناك كوب قهوة.
+
+كان هناك كيس... فارغ.
+
+وربما تسألين: لماذا فارغ؟
+
+لأن لكل شيء معنى.
+
+القهوة كانت لتمنحكِ لحظة صغيرة وسط يوم طويل...
+لحظة تحسّن مزاجكِ، وتقول لكِ إنكِ تستحقين شيئًا لطيفًا دون سبب.
+
+أما الكيس... فتركته فارغًا لسبب آخر.
+
+لأن بعض الأشياء لا يجب أن تأتي ممتلئة من البداية.
+
+هناك أشياء أجمل عندما نترك لها مساحة لتُملأ مع الوقت.
+
+<span class="gold">تجارب جديدة.
+أماكن لم تريها بعد.
+ضحكات لم تأتِ بعد.
+أيام ستصبح يومًا ذكريات.</span>
+
+وأشياء كثيرة لا نعرف الآن أنها ستصبح جزءًا من حكاياتنا.
+
+لذلك...
+
+لا تنظري إلى الكيس على أنه فارغ.
+
+انظري إليه على أنه مساحة.
+
+<span class="gold">مساحة لكل شيء جميل لم يحدث بعد.</span>
+
+وربما...
+
+أجمل ما يمكن أن تمتلئ به الأشياء،
+
+هو ما نعيشه بأنفسنا.
+
 الغريب...
 أنكِ لم تحصلي على إجابة واحدة واضحة.
 
 ومع ذلك، حصلتِ على شيء آخر.
 
-<span class="gold">فضول.
+فضول.
+
 وربما ابتسامة.
-وربما لحظة هدوء وسط يوم لم يكن هادئًا.</span>
+
+وربما لحظة هدوء وسط يوم لم يكن هادئًا.
 
 وربما... بدأتِ تشعرين أن هناك شيئًا ينتظركِ في الصفحة القادمة.
 
@@ -784,7 +811,6 @@ textarea:focus{
         </div>
 
 
-        <!-- خانة الإرسال -->
         <div class="question-box">
 
             <form id="storyForm">
@@ -817,11 +843,12 @@ textarea:focus{
 
 
         <div class="text" style="margin-top:28px;">
+
 وبعدها...
 
 لا تبحثي عن الصفحة التالية.
 
-دعيها هي تأتي إليكِ.
+دعِيها هي تأتي إليكِ.
 
 فربما...
 
@@ -831,12 +858,12 @@ textarea:focus{
 <span class="gold">سر صغير... في عالم كبير.</span>
 
 والحكاية مستمرة.
+
         </div>
 
     </section>
 
 
-    <!-- أزرار التنقل -->
     <div class="buttons">
 
         <button
@@ -909,10 +936,6 @@ textarea:focus{
 
 <script>
 
-/* =========================
-   الصفحات
-========================= */
-
 let currentPage = 0;
 
 const pages = document.querySelectorAll(".page");
@@ -964,13 +987,10 @@ function changePage(direction){
     updatePage();
 
     startMusic();
-
 }
 
 
-/* =========================
-   الموسيقى
-========================= */
+/* الموسيقى */
 
 const music =
     document.getElementById("backgroundMusic");
@@ -981,9 +1001,7 @@ const musicToggle =
 const volumeControl =
     document.getElementById("volumeControl");
 
-
 music.volume = 0.25;
-
 
 function startMusic(){
 
@@ -991,17 +1009,9 @@ function startMusic(){
         .then(()=>{
             musicToggle.textContent = "Ⅱ";
         })
-        .catch(()=>{
-            /*
-              بعض المتصفحات تمنع تشغيل الصوت
-              قبل أول تفاعل من الزائرة.
-              بمجرد الضغط على الصفحة أو التالي
-              سيبدأ التشغيل.
-            */
-        });
+        .catch(()=>{});
 
 }
-
 
 function toggleMusic(){
 
@@ -1023,12 +1033,10 @@ function toggleMusic(){
 
 }
 
-
 musicToggle.addEventListener(
     "click",
     toggleMusic
 );
-
 
 volumeControl.addEventListener(
     "input",
@@ -1039,10 +1047,6 @@ volumeControl.addEventListener(
     }
 );
 
-
-/*
-   محاولة تشغيل الموسيقى مباشرة
-*/
 window.addEventListener(
     "load",
     function(){
@@ -1052,11 +1056,6 @@ window.addEventListener(
     }
 );
 
-
-/*
-   تشغيل الموسيقى عند أول تفاعل
-   إذا منع المتصفح التشغيل التلقائي.
-*/
 document.addEventListener(
     "click",
     function(){
@@ -1070,16 +1069,13 @@ document.addEventListener(
 );
 
 
-/* =========================
-   إرسال الإجابة
-========================= */
+/* إرسال الإجابة */
 
 const storyForm =
     document.getElementById("storyForm");
 
 const successMessage =
     document.getElementById("successMessage");
-
 
 storyForm.addEventListener(
     "submit",
@@ -1118,7 +1114,6 @@ storyForm.addEventListener(
                     }
                 );
 
-
             if(response.ok){
 
                 textarea.value = "";
@@ -1154,8 +1149,6 @@ storyForm.addEventListener(
     }
 );
 
-
-/* تشغيل أولي */
 updatePage();
 
 </script>
