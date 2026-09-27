@@ -936,6 +936,10 @@
             إرسال
           </button>
 
+          <button class="secondary" onclick="endStory()">
+            أنهي الحكاية هنا
+          </button>
+
         </div>
 
         <div
@@ -1016,87 +1020,98 @@
 
 
     async function sendAnswer() {
-
       const answer =
         document
           .getElementById("answer")
           .value
           .trim();
 
-
       if (!answer) {
-
         alert("اكتبي إجابتك أولًا 🤍");
-
         return;
-
       }
 
-
       try {
-
         const response = await fetch(
-
-          "https://formspree.io/f/mjykvvyn",
-
+          "https://autumn-sun-d575.no0kaa1001.workers.dev/",
           {
-
             method: "POST",
-
             headers: {
-
-              "Content-Type":
-                "application/json",
-
-              "Accept":
-                "application/json"
-
+              "Content-Type": "application/json"
             },
-
             body: JSON.stringify({
-
-              answer: answer
-
+              message: `✍️ رسالة من الحكاية:\n\n${answer}`
             })
-
           }
-
         );
 
-
         if (response.ok) {
-
           document
             .getElementById("answer")
             .style.display = "none";
-
 
           document
             .querySelector("#page4 .buttons")
             .style.display = "none";
 
+          document
+            .getElementById("thanks")
+            .style.display = "block";
+        } else {
+          alert(
+            "صار خطأ بسيط، جربي الإرسال مرة ثانية."
+          );
+        }
+
+      } catch (error) {
+        alert(
+          "تأكدي من اتصال الإنترنت وجربي مرة ثانية."
+        );
+      }
+    }
+
+    async function endStory() {
+      try {
+        const response = await fetch(
+          "https://autumn-sun-d575.no0kaa1001.workers.dev/",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+              message: "⛔ اختارت إنهاء الحكاية هنا."
+            })
+          }
+        );
+
+        if (response.ok) {
+          document
+            .getElementById("answer")
+            .style.display = "none";
+
+          document
+            .querySelector("#page4 .buttons")
+            .style.display = "none";
+
+          document
+            .getElementById("thanks")
+            .innerHTML = "انتهت الحكاية هنا 🤍";
 
           document
             .getElementById("thanks")
             .style.display = "block";
-
-
         } else {
-
           alert(
-            "صار خطأ بسيط، جربي الإرسال مرة ثانية."
+            "صار خطأ بسيط، جربي مرة ثانية."
           );
-
         }
 
       } catch (error) {
-
         alert(
           "تأكدي من اتصال الإنترنت وجربي مرة ثانية."
         );
-
       }
-
     }
 
   </script>
