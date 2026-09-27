@@ -577,7 +577,22 @@
 
     }
 
-  </style>
+  
+    .final-end-section {
+      margin-top: 35px;
+      text-align: center;
+    }
+
+    .final-end-section p {
+      margin-bottom: 18px;
+    }
+
+    .final-end-section button {
+      display: block;
+      margin: 0 auto;
+    }
+
+</style>
 </head>
 
 
@@ -936,9 +951,18 @@
             إرسال
           </button>
 
+        </div>
+
+        <div class="final-end-section">
+          <p>
+            وإن شعرتِ أن هذه الحكاية وصلت إلى نهايتها، وأنك لا تريدين أن تصلك حكايات أخرى بعدها، فلا بأس.
+            اتركي الحكاية تنتهي هنا، ولن يأتي بعدها شيء آخر.
+          </p>
+
           <button class="secondary" onclick="endStory()">
             أنهي الحكاية هنا
           </button>
+        </div>
 
         </div>
 
@@ -1080,37 +1104,24 @@
               "Content-Type": "application/json"
             },
             body: JSON.stringify({
-              message: "⛔ اختارت إنهاء الحكاية هنا."
+              message: "⛔ اختارت إنهاء الحكاية نهائيًا."
             })
           }
         );
 
         if (response.ok) {
-          document
-            .getElementById("answer")
-            .style.display = "none";
-
-          document
-            .querySelector("#page4 .buttons")
-            .style.display = "none";
-
-          document
-            .getElementById("thanks")
-            .innerHTML = "انتهت الحكاية هنا 🤍";
-
-          document
-            .getElementById("thanks")
-            .style.display = "block";
+          document.body.innerHTML = `
+            <div style="min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;padding:30px;box-sizing:border-box;">
+              <div>
+                <div id="thanks">انتهت الحكاية هنا 🤍</div>
+              </div>
+            </div>
+          `;
         } else {
-          alert(
-            "صار خطأ بسيط، جربي مرة ثانية."
-          );
+          alert("صار خطأ بسيط، جربي مرة ثانية.");
         }
-
       } catch (error) {
-        alert(
-          "تأكدي من اتصال الإنترنت وجربي مرة ثانية."
-        );
+        alert("تأكدي من اتصال الإنترنت وجربي مرة ثانية.");
       }
     }
 
